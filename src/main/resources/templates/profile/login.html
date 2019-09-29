@@ -6,6 +6,20 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<form>
+    <label th:for="username">Username:
+        <input type="text" name="username"/>
+    </label>
+
+    <label th:for="password">Password:
+        <input type="password" name="password"/>
+    </label>
+
+    <input type="submit">
+
+</form>
+
+<a href="/user/sign-up">Sign Up</a>
 
 </body>
 </html>

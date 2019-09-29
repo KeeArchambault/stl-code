@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<form>
+    <label th:for="title" th:text="Title:">
+    <input type="text" name="title">
+    </label>
 
+    <input type="text-area" name="body"/>
+
+    <input type="submit"/>
+
+</form>
 
 </body>
 </html>

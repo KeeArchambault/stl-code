@@ -6,6 +6,13 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<a th:href="/new-post">New Post</a>
+
+<table th:each="post : ${posts}">
+    <tr th:text="${post.title}"></tr>
+    <td th:text="${post.body"}></td>
+</table>
+
 
 
 </body>
