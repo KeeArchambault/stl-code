@@ -26,8 +26,15 @@ public class UserController {
 
     @Autowired
     private PostDao postDao;
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String profile (Model model, @PathVariable int id){
 
-    @RequestMapping(value="")
+        model.addAttribute("user", userDao.findById(id));
+        model.addAttribute("title", "Profile");
+        return "profile/index";
+    }
+
+    @RequestMapping(value="/login")
     public String login(Model model){
 
         model.addAttribute("title", "Log In");
@@ -57,13 +64,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
-    public String profile (Model model, @PathVariable int id){
 
-        model.addAttribute("user", userDao.findById(id));
-        model.addAttribute("title", "Profile");
-        return "profile/index";
-    }
 
 
 }
