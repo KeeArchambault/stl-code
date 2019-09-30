@@ -8,9 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
-@RequestMapping(value="home")
-public class HomeController {
+@RequestMapping(value="forum")
+public class ForumController {
 
     @Autowired
     private PostDao postDao;
@@ -18,13 +19,11 @@ public class HomeController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value="")
-    public String index(Model model){
+    @RequestMapping(value="", method= RequestMethod.GET)
+    public String index(Model model) {
 
-        model.addAttribute("title", "Stl Code Cafe");
-
-        return "home/index";
+        model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("title", "Forum");
+        return "forum/index";
     }
-
-
 }

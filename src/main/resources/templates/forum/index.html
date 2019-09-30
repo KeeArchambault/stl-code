@@ -6,6 +6,9 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<br>
+<p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
+
 <table th:each="post : ${posts}">
     <tr th:text="${post.title}"></tr>
     <td th:text="${post.body"}></td>

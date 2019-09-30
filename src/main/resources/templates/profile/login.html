@@ -5,21 +5,27 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-
+<br>
 <form>
-    <label th:for="username">Username:
-        <input type="text" name="username"/>
-    </label>
+    <div class="form-group">
+        <label th:for="username">Username:
+            <input class="form-control" type="text" name="username"/>
+        </label>
+    </div>
 
-    <label th:for="password">Password:
-        <input type="password" name="password"/>
-    </label>
+    <div class="form-group">
+        <label th:for="password">Password:
+            <input class="form-control" type="password" name="password"/>
+        </label>
+    </div>
 
     <input type="submit">
 
 </form>
 
-<a href="/user/sign-up">Sign Up</a>
+<br>
+<a href="/user/sign-up">Don't have an account yet? Sign Up.</a>
+
 
 </body>
 </html>

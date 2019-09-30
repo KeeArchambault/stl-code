@@ -6,18 +6,31 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form stle="max-width: 600px;">
-    <div class="form-group"><label
-        <input class="form-control" type="text" name="userName"/>
-    </div>
+<br>
+
+<form style="max-width: 215px;" th:object="${user}">
     <div class="form-group">
-        <input class="form-control" type="email" name="email"/>
+        <label th:for="name">Username:</label>
+        <input class="form-control" th:field="*{name}"/>
+        <span th:errors="*{name}" class="error"></span>
     </div>
+
     <div class="form-group">
-        <input class="form-control" type="password" name="password"/>
+        <label th:for="email">Email:</label>
+        <input class="form-control" type="email" th:field="*{email}"/>
+        <span th:errors="*{email}" class="error"></span>
     </div>
+
     <div class="form-group">
-        <input class="form-control" type="password" name="verify"/>
+        <label th:for="password">Password:</label>
+        <input class="form-control" type="password" th:field="*{password}"/>
+        <span th:errors="*{password}" class="error"></span>
+    </div>
+
+    <label th:for="verify">Verify Password:</label>
+    <div class="form-group">
+        <input class="form-control" type="password" th:field="*{verify}"/>
+        <span th:errors="*{verify}" class="error"></span>
     </div>
 
     <input type="submit"/>

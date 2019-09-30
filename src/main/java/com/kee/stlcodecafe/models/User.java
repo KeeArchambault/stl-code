@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -17,11 +18,23 @@ public class User {
 
     @NotNull
     @Size(min=3, max=15)
-    private String userName;
+    private String name;
 
     @Id
     @GeneratedValue
     private int id;
+
+    @Email
+    @NotNull
+    private String email;
+
+    @NotNull
+    @Size(min=3, max=15)
+    private String password;
+
+    @NotNull
+    @Size(min=3, max=15)
+    private String verify;
 
     @OneToMany
     private List<Post> posts;
@@ -29,19 +42,19 @@ public class User {
     public User(){
     }
 
-    public User(String name){
+    public User(String username){
     }
 
     public void addPost(Post post){
         posts.add(post);
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Post> getPosts() {
@@ -50,6 +63,30 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getVerify() {
+        return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
     }
 
 }
