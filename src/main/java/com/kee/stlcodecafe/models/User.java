@@ -4,10 +4,7 @@ package com.kee.stlcodecafe.models;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,11 +36,23 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+    @OneToOne
+    private Session session;
+
     public User(){
     }
 
     public User(String username){
     }
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+
 
     public void addPost(Post post){
         posts.add(post);

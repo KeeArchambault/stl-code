@@ -3,17 +3,16 @@ package com.kee.stlcodecafe.controllers;
 import com.kee.stlcodecafe.models.Post;
 import com.kee.stlcodecafe.models.User;
 import com.kee.stlcodecafe.models.data.PostDao;
+import com.kee.stlcodecafe.models.data.SessionDao;
 import com.kee.stlcodecafe.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +25,10 @@ public class UserController {
 
     @Autowired
     private PostDao postDao;
+
+    @Autowired
+    private SessionDao sessionDao;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String profile (Model model, @PathVariable int id){
 
@@ -34,8 +37,26 @@ public class UserController {
         return "profile/index";
     }
 
-    @RequestMapping(value="/login")
+    @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(Model model){
+
+        model.addAttribute("title", "Log In");
+        return "profile/login";
+    }
+
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+    public String processLogin(Model model, @RequestParam String username, String password){
+
+    for(User user : userDao.findAll()){
+        if(username == user.getName()){
+            int targetId = user.getId();
+
+            sessionDao.save(user);
+
+
+
+        }
+    }
 
         model.addAttribute("title", "Log In");
         return "profile/login";
@@ -52,20 +73,20 @@ public class UserController {
     @RequestMapping(value="sign-up", method= RequestMethod.POST)
     public String processSignUp(Model model, @ModelAttribute @Valid User user, Errors errors) {
 
-        if (errors.hasErrors() || user.getPassword() != user.getVerify()) {
+        for(User existUser : userDao.findAll()) {
+            if (user.getId() != existUser.getId()){
+                if (errors.hasErrors() || user.getPassword() != user.getVerify()) {
+                    return "user/sign-up";
+                }else {int id = user.getId();
+                    userDao.save(user);
+                    return "redirect:/profile" + id;
 
-            return "user/sign-up";
 
-        } else {
-            userDao.save(user);
-            int id = user.getId();
-
-            return "redirect:/profile" + id;
-        }
+                }
+        }else {int id = user.getId();
+                    userDao.save(user);
+                    return "redirect:/profile" + id;
     }
 
 
-
-
 }
-
