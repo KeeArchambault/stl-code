@@ -51,8 +51,7 @@ public class UserController {
             }
         }
 
-        model.addAttribute("title", "Log In");
-        return "profile/login";
+        return "/login";
     }
 
     @RequestMapping(value = "sign-up", method = RequestMethod.GET)
@@ -78,16 +77,19 @@ public class UserController {
 
                 }
             } else {
-                int id = user.getId();
-                sessionDao.save(user);
-                return "redirect:/profile" + id;
+
+                if(existUser.getPassword().equals(user.getPassword())) {
+                    int id = user.getId();
+                    sessionDao.save(user);
+                    return "redirect:/profile" + id;
+                }
             }
 
         }
         return "profile/sign-up";
     }
 
-    @RequestMapping(value = "profile", method = RequestMethod.GET)
+    @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
     public String profile(Model model, @RequestParam Session session) {
 
         if(session.getUser() != null)
