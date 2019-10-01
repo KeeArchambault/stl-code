@@ -36,23 +36,11 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
-    @OneToOne
-    private Session session;
-
     public User(){
     }
 
-    public User(String username){
+    public User(String name){
     }
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-
 
     public void addPost(Post post){
         posts.add(post);

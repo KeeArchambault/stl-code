@@ -8,7 +8,7 @@
 
 <br>
 
-<form style="max-width: 215px;" th:object="${user}">
+<form method="post" style="max-width: 215px;" th:object="${user}">
     <div class="form-group">
         <label th:for="name">Username:</label>
         <input class="form-control" th:field="*{name}"/>
