@@ -96,4 +96,12 @@ public class UserController {
         model.addAttribute("title", "Profile");
         return "profile/index";
     }
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public String logout(Model model, @RequestParam Session session) {
+
+        User user = session.getUser();
+        sessionDao.delete(user);
+        return "redirect: /login";
+    }
 }
