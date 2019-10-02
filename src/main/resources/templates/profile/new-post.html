@@ -6,13 +6,14 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form>
-    <label th:for="title" th:text="Title:">
-    <input type="text" name="title">
-    </label>
-
-    <input type="text-area" name="body"/>
-
+<form class="form-group">
+    <label th:for="title">Title:</label>
+    <br>
+    <input style="width: 500px;" type="text" name="title" class="form-control"/>
+        <br>
+        <br>
+    <input style="width: 500px; height: 200px" type="text-area" name="body" class="form-control"/>
+        <br>
     <input type="submit"/>
 
 </form>
