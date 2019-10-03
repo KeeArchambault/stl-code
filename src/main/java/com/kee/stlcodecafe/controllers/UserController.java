@@ -39,37 +39,44 @@ public class UserController {
     @Autowired
     private PostDao postDao;
 
-    @RequestMapping(value="", method = RequestMethod.GET)
-    public String login(Model model){
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String login(Model model) {
 
         model.addAttribute("title", "Log In");
         return "user/login";
     }
 
-    @RequestMapping(value="", method = RequestMethod.POST)
-    public String processLogin(Model model, @RequestParam String name) {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String processLogin(Model model, @RequestParam String name, @RequestParam String password) {
+
+        model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-            if (user.getName().equals(name)) { //checks user data for a matching name
-                int id = user.getId(); //gets the user's id to add to the session
-                Session session = new Session(id);
-                sessionDao.save(session);
+                if (user.getName().equals(name) && user.getPassword().equals(password)){
+                        int id = user.getId(); //gets the user's id to add to the session
+                        Session session = new Session(id);
+                        sessionDao.save(session);
 
-                model.addAttribute("id",id);
-                model.addAttribute("title", "Log In");
-                return "redirect:user/profile/" + id; //redirects to the appropriate user profile
-            }
+                        model.addAttribute("id", id);
+                        return "redirect:user/profile/" + id; //redirects to the appropriate user profile
+                    } else {
+                        model.addAttribute("errors", "Invalid login credentials.");
+                        return "user/login";
+                    }
+                }
 
-        }
-            model.addAttribute("title", "Log In");
-            return "user/login";
+
+        model.addAttribute("errors", "");
+        return "user/login";
     }
+
+
 
     @RequestMapping(value="logout", method = RequestMethod.GET)
     public String logout(Model model){
         sessionDao.deleteAll();
 
-        return "redirect:user/login";
+        return "user/login";
     }
 
     @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
