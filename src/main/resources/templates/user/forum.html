@@ -6,15 +6,15 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<a href="../../user/new-post">New Post</a>
+<br>
+<p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
-<div class="form-group" th:object="${user}">
 <table th:each="post : ${posts}">
     <tr th:text="${post.title}"></tr>
     <td th:text="${post.body"}></td>
-</table>
-</div>
 
+
+</table>
 
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="home")
 public class HomeController {
 
+
     @Autowired
     private PostDao postDao;
 
@@ -26,5 +27,18 @@ public class HomeController {
         return "home/index";
     }
 
+    @RequestMapping(value="cafe-directory", method= RequestMethod.GET)
+    public String cafeIndex(Model model) {
 
+        model.addAttribute("title", "Local Cafes");
+
+        return "home/cafe-directory";
+    }
+
+    @RequestMapping(value="ed-resources", method= RequestMethod.GET)
+    public String resourcesIndex(Model model) {
+
+        model.addAttribute("title", "Resources");
+        return "home/ed-resources";
+    }
 }

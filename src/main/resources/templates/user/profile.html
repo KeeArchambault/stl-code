@@ -7,12 +7,17 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <br>
-<p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
+<a href="../../user/new-post">New Post</a>
 
+<div class="form-group" th:object="${user}">
 <table th:each="post : ${posts}">
     <tr th:text="${post.title}"></tr>
     <td th:text="${post.body"}></td>
 </table>
+</div>
+
+<a href="../../user/logout">Log Out</a>
+
 
 </body>
 </html>
