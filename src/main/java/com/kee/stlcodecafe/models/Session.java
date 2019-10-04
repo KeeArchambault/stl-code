@@ -20,6 +20,8 @@ public class Session {
     @OneToOne
     private User user;
 
+    private int sessionKey;
+
     public Session(){
 
     }
@@ -35,14 +37,7 @@ public class Session {
     public void setSessionKey(int sessionKey) {
         this.sessionKey = sessionKey;
     }
-
-    private int sessionKey;
-
-
-
-
-
-
+    
 
     public int getId() {
         return Id;

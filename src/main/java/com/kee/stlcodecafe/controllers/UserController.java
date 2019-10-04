@@ -8,6 +8,7 @@ import com.kee.stlcodecafe.models.data.SessionDao;
 import com.kee.stlcodecafe.models.data.UserDao;
 import com.kee.stlcodecafe.models.forms.AddPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -109,32 +110,21 @@ public class UserController {
             model.addAttribute("posts", user.getPosts());
             model.addAttribute("user", user);
 
-            return "redirect:../user/profile/" + id;
+            return "redirect:/profile";
         }
     }
 
     @RequestMapping(value = "new-post", method = RequestMethod.GET)
-    public String newPost(Model model, Post post, @RequestParam int id) {
+    public String newPost(Model model, Post post) {
 
         model.addAttribute("title", "Create a New Post");
 
-        if (sessionDao.count() == 1) {
-            User user = userDao.findById(id).get();
-            Iterable<Post> posts = postDao.findAll();
-            AddPostForm form = new AddPostForm(user, posts);
-
-            model.addAttribute("id", id);
-            model.addAttribute("form", form);
-            model.addAttribute("posts", posts);
-            model.addAttribute("user", user);
-            return "user/new-post";
-        }
-
-        return "redirect:/login";
+        model.addAttribute("post", post);
+        return "user/new-post";
     }
 
     @RequestMapping(value = "new-post", method = RequestMethod.POST)
-    public String processNewPost(Model model, @RequestParam int postId, @RequestParam int id, Errors errors) {
+    public String processNewPost(Model model, @ModelAttribute @Valid Post post, Errors errors) {
 
 
         model.addAttribute("title", "Create a New Post");
@@ -143,16 +133,22 @@ public class UserController {
             return "user/new-post";
         }
 
-        Post post =  postDao.findById(postId).get();
-        User user = userDao.findById(id).get();
-        List<Post> posts = user.getPosts();
-        model.addAttribute("user", user);
 
+        for (User existingUser : userDao.findAll()) {
+            for (Session testSession : sessionDao.findAll()) {
+                if (existingUser.getId() == testSession.getSessionKey()) {
 
-        user.addPost(post);
+                    int id = testSession.getSessionKey();
 
-        userDao.save(user);
-        return "redirect:";
+                    User user = userDao.findById(id).get();
+                    user.addPost(post);
+
+                    userDao.save(user);
+                    return "redirect:";
+                }
+            }
+        }
+        return "user/new-post";
     }
 
     @RequestMapping(value="forum", method= RequestMethod.GET)
