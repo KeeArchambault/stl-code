@@ -6,25 +6,17 @@ import com.kee.stlcodecafe.models.User;
 import com.kee.stlcodecafe.models.data.PostDao;
 import com.kee.stlcodecafe.models.data.SessionDao;
 import com.kee.stlcodecafe.models.data.UserDao;
-import org.apache.catalina.connector.Request;
+import com.kee.stlcodecafe.models.forms.AddPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping(value="")
@@ -52,37 +44,37 @@ public class UserController {
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-                if (user.getName().equals(name) && user.getPassword().equals(password)){
-                        int id = user.getId(); //gets the user's id to add to the session
-                        Session session = new Session(id);
-                        sessionDao.save(session);
+            if (user.getName().equals(name) && user.getPassword().equals(password)) {
+                int id = user.getId(); //gets the user's id to add to the session
+                Session session = new Session(id);
+                sessionDao.save(session);
 
-                        model.addAttribute("id", id);
-                        return "redirect:/profile/"; //redirects to the appropriate user profile
-                    } else {
-                        model.addAttribute("errors", "Invalid login credentials.");
-                        return "user/login";
-                    }
-                }
+                model.addAttribute("id", id);
+                return "redirect:/profile/"; //redirects to the appropriate user profile
+            } else {
+                model.addAttribute("errors", "Invalid login credentials.");
+                return "user/login";
+            }
+        }
 
         model.addAttribute("errors", "");
         return "user/login";
     }
 
 
-    @RequestMapping(value="logout", method = RequestMethod.GET)
-    public String logout(Model model){
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logout(Model model) {
         sessionDao.deleteAll();
 
         return "redirect:/login";
     }
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
-    public String profile(Model model){
+    public String profile(Model model) {
 
         model.addAttribute("title", "Profile");
 
-        for(User existingUser : userDao.findAll()) {
+        for (User existingUser : userDao.findAll()) {
             for (Session testSession : sessionDao.findAll()) {
                 if (existingUser.getId() == testSession.getSessionKey()) {
 
@@ -94,8 +86,8 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value="sign-up", method = RequestMethod.GET)
-    public String signUp(Model model, User user){
+    @RequestMapping(value = "sign-up", method = RequestMethod.GET)
+    public String signUp(Model model, User user) {
 
         model.addAttribute("title", "Sign Up");
 
@@ -104,7 +96,7 @@ public class UserController {
         return "user/sign-up";
     }
 
-    @RequestMapping(value="sign-up", method= RequestMethod.POST)
+    @RequestMapping(value = "sign-up", method = RequestMethod.POST)
     public String processSignUp(Model model, @ModelAttribute @Valid User user, Errors errors) {
 
         if (errors.hasErrors() || !user.getPassword().equals(user.getVerify())) {
@@ -121,28 +113,46 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="new-post", method = RequestMethod.GET)
-    public String post(Model model){
+    @RequestMapping(value = "new-post", method = RequestMethod.GET)
+    public String newPost(Model model, Post post, @RequestParam int id) {
 
         model.addAttribute("title", "Create a New Post");
 
-        if(sessionDao.count() == 1) {
-            Session session = (Session) sessionDao.findAll();
-            int id = session.getId();
+        if (sessionDao.count() == 1) {
+            User user = userDao.findById(id).get();
+            Iterable<Post> posts = postDao.findAll();
+            AddPostForm form = new AddPostForm(user, posts);
 
             model.addAttribute("id", id);
+            model.addAttribute("form", form);
+            model.addAttribute("posts", posts);
+            model.addAttribute("user", user);
             return "user/new-post";
         }
 
         return "redirect:/login";
     }
 
-    @RequestMapping(value="new-post", method = RequestMethod.POST)
-    public String processPost(Model model, @RequestParam String title, @RequestParam String body){
+    @RequestMapping(value = "new-post", method = RequestMethod.POST)
+    public String processNewPost(Model model, @RequestParam int postId, @RequestParam int id, Errors errors) {
 
 
         model.addAttribute("title", "Create a New Post");
-        return "user/new-post";
+
+        if (errors.hasErrors()) {
+            return "user/new-post";
+        }
+
+        Post post =  postDao.findById(postId).get();
+        User user = userDao.findById(id).get();
+        List<Post> posts = user.getPosts();
+        model.addAttribute("user", user);
+
+
+        user.addPost(post);
+
+        userDao.save(user);
+        return "redirect:";
     }
 
     @RequestMapping(value="forum", method= RequestMethod.GET)

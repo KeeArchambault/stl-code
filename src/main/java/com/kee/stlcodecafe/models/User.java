@@ -36,6 +36,9 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+    @OneToOne
+    private Session session;
+
     public User(){
     }
 

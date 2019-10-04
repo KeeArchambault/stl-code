@@ -23,10 +23,14 @@ public class Post {
     @Size(min = 1, message = "Post body must not be empty")
     private String body;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @ManyToOne
     private User user;
 
-    public Post(int id) {
+    public Post() {
     }
 
     public Post(String title, String body){
