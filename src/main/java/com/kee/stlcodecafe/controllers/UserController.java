@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value="user")
+@RequestMapping(value="")
 public class UserController {
 
     @Autowired
@@ -39,14 +39,14 @@ public class UserController {
     @Autowired
     private PostDao postDao;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
 
         model.addAttribute("title", "Log In");
         return "user/login";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLogin(Model model, @RequestParam String name, @RequestParam String password) {
 
         model.addAttribute("title", "Log In");
@@ -58,29 +58,27 @@ public class UserController {
                         sessionDao.save(session);
 
                         model.addAttribute("id", id);
-                        return "redirect:user/profile/" + id; //redirects to the appropriate user profile
+                        return "redirect:/profile/"; //redirects to the appropriate user profile
                     } else {
                         model.addAttribute("errors", "Invalid login credentials.");
                         return "user/login";
                     }
                 }
 
-
         model.addAttribute("errors", "");
         return "user/login";
     }
-
 
 
     @RequestMapping(value="logout", method = RequestMethod.GET)
     public String logout(Model model){
         sessionDao.deleteAll();
 
-        return "user/login";
+        return "redirect:/login";
     }
 
-    @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
-    public String profile(Model model, @PathVariable int id){
+    @RequestMapping(value = "profile", method = RequestMethod.GET)
+    public String profile(Model model){
 
         model.addAttribute("title", "Profile");
 
@@ -128,10 +126,13 @@ public class UserController {
 
         model.addAttribute("title", "Create a New Post");
 
-//        if(!session.isEmpty()) {
-//            model.addAttribute("session", session); // passes the user id to the template
-//            return "user/new-post";
-//        }
+        if(sessionDao.count() == 1) {
+            Session session = (Session) sessionDao.findAll();
+            int id = session.getId();
+
+            model.addAttribute("id", id);
+            return "user/new-post";
+        }
 
         return "redirect:/login";
     }
@@ -149,11 +150,10 @@ public class UserController {
 
         model.addAttribute("title", "Forum");
 
-//        if(!session.isEmpty()) {
-//            model.addAttribute("session", session); // passes the user id to the template
-//            model.addAttribute("posts", postDao.findAll());
-//            return "user/forum";
-//        }
+        if(sessionDao.count() == 1) {
+           model.addAttribute("posts", postDao.findAll());
+           return "user/forum";
+        }
 
 
         return "redirect:/login";

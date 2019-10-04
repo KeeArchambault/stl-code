@@ -23,6 +23,7 @@ public class Session {
     public Session(int id){
         this.setSessionKey(id);
     }
+
     public int getSessionKey() {
         return sessionKey;
     }
