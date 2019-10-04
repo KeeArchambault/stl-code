@@ -17,29 +17,28 @@ public class Session {
     @GeneratedValue
     private int Id;
 
+
     @OneToOne
     private User user;
 
-    private int sessionKey;
-
-    public Session(){
+    public Session() {
 
     }
 
-    public Session(int id){
-        this.setSessionKey(id);
+    public Session(User user) {
+        this.user = user;
     }
-
-    public int getSessionKey() {
-        return sessionKey;
-    }
-
-    public void setSessionKey(int sessionKey) {
-        this.sessionKey = sessionKey;
-    }
-    
 
     public int getId() {
         return Id;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public int userId(){
+        return this.user.getId();
+    }
+
 }

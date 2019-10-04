@@ -8,11 +8,11 @@
 
 <br>
 <a href="/new-post">New Post</a>
-
+<br>
 <div class="form-group" th:object="${user}">
-<table th:each="post : ${posts}">
-    <tr th:text="${post.title}"></tr>
-    <td th:text="${post.body"}></td>
+<table th:each="post : *{posts}">
+    <h3 th:text="${post.title}"></h3>
+    <p th:text="${post.body}"></p>
 </table>
 </div>
 

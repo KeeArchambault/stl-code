@@ -1,12 +1,12 @@
 package com.kee.stlcodecafe.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class Post {
@@ -23,12 +23,19 @@ public class Post {
     @Size(min = 1, message = "Post body must not be empty")
     private String body;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @ManyToOne
     private User user;
+
+    public Date getCreated() {
+        return created;
+    }
+
+    private Date created;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
 
     public Post() {
     }
@@ -62,4 +69,7 @@ public class Post {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

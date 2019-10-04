@@ -46,12 +46,10 @@ public class UserController {
 
         for (User user : userDao.findAll()) {
             if (user.getName().equals(name) && user.getPassword().equals(password)) {
-                int id = user.getId(); //gets the user's id to add to the session
-                Session session = new Session(id);
+                Session session = new Session(user);
                 sessionDao.save(session);
-
-                model.addAttribute("id", id);
                 return "redirect:/profile/"; //redirects to the appropriate user profile
+
             } else {
                 model.addAttribute("errors", "Invalid login credentials.");
                 return "user/login";
@@ -77,9 +75,9 @@ public class UserController {
 
         for (User existingUser : userDao.findAll()) {
             for (Session testSession : sessionDao.findAll()) {
-                if (existingUser.getId() == testSession.getSessionKey()) {
+                if (existingUser.getId() == testSession.userId()) {
 
-                    model.addAttribute("id", existingUser.getId());// passes the user id to the template to display the correct posts
+                    model.addAttribute("user", existingUser);// passes the user id to the template to display the correct posts
                     return "user/profile";
                 }
             }
@@ -106,7 +104,8 @@ public class UserController {
 
         } else {
             userDao.save(user);
-            int id = user.getId();
+            Session session = new Session(user);
+            sessionDao.save(session);
             model.addAttribute("posts", user.getPosts());
             model.addAttribute("user", user);
 
@@ -133,18 +132,18 @@ public class UserController {
             return "user/new-post";
         }
 
-
         for (User existingUser : userDao.findAll()) {
             for (Session testSession : sessionDao.findAll()) {
-                if (existingUser.getId() == testSession.getSessionKey()) {
+                if (existingUser.getId() == testSession.userId()) {
 
-                    int id = testSession.getSessionKey();
+                    int id = testSession.userId();
 
                     User user = userDao.findById(id).get();
+                    post.setUser(user);
+                    postDao.save(post);
                     user.addPost(post);
-
                     userDao.save(user);
-                    return "redirect:";
+                    return "redirect:/profile";
                 }
             }
         }

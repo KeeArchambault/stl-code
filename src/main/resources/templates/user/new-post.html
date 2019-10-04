@@ -6,13 +6,16 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 <br>
-<form class="form-group" th:object="${post}">
+<form method="post" class="form-group" th:object="${post}">
+
     <label th:for="title">Title:</label>
     <br>
     <input style="width: 500px;" type="text" name="title" class="form-control" th:field="*{title}"/>
+    <span th:errors="*{title}" class="error"></span>
         <br>
         <br>
     <input style="width: 500px;" type="textarea" name="body" class="form-control" th:field="*{body}"/>
+    <span th:errors="*{body}" class="error"></span>
         <br>
     <input type="submit"/>
 

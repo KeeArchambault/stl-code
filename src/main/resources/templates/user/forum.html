@@ -10,9 +10,13 @@
 <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
 <table th:each="post : ${posts}">
-    <tr th:text="${post.title}"></tr>
-    <td th:text="${post.body"}></td>
+    <h3 th:text="${post.title}"></h3>
 
+    <p th:text="${post.body}"></p>
+    <br>
+    <label for="date">Created:<p id="date" style="size: 5px; color: gray;" th:text="${post.created}"></p></label>
+
+    <br>
 
 </table>
 
