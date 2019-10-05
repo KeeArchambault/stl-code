@@ -2,22 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${user.name}"></h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <br>
-<a href="/new-post">New Post</a>
+<a href="/new-post">New Post</a> |
+<a href="/logout">Log Out</a>
+
+<br>
 <br>
 <div class="form-group" th:object="${user}">
 <table th:each="post : *{posts}">
-    <h3 th:text="${post.title}"></h3>
+
+    <a style="font-size: 18;" th:href="'/post/'+ ${post.id}"
+       th:text="${post.title}">
+    </a>
     <p th:text="${post.body}"></p>
-    <label for="date">Created:<p id="date" style="size: 5px; color: gray;" th:text="${post.created}"></p></label>
+    <p name="date" style="text-size: 5pt; color: gray;" th:text="${post.created}"></p>
 </table>
 </div>
 
-<a href="/logout">Log Out</a>
 
 
 </body>

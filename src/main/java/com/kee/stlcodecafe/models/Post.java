@@ -2,6 +2,7 @@ package com.kee.stlcodecafe.models;
 
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,8 @@ public class Post {
     private String title;
 
     @NotNull
-    @Size(min = 1, message = "Post body must not be empty")
+    @Lob
+    @Size(min = 1, max =500, message = "Post too long.")
     private String body;
 
     @ManyToOne
@@ -30,6 +32,7 @@ public class Post {
         return created;
     }
 
+    @DateTimeFormat()
     private Date created;
 
     @PrePersist

@@ -113,56 +113,6 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "new-post", method = RequestMethod.GET)
-    public String newPost(Model model, Post post) {
-
-        model.addAttribute("title", "Create a New Post");
-
-        model.addAttribute("post", post);
-        return "user/new-post";
-    }
-
-    @RequestMapping(value = "new-post", method = RequestMethod.POST)
-    public String processNewPost(Model model, @ModelAttribute @Valid Post post, Errors errors) {
-
-
-        model.addAttribute("title", "Create a New Post");
-
-        if (errors.hasErrors()) {
-            return "user/new-post";
-        }
-
-        for (User existingUser : userDao.findAll()) {
-            for (Session testSession : sessionDao.findAll()) {
-                if (existingUser.getId() == testSession.userId()) {
-
-                    int id = testSession.userId();
-
-                    User user = userDao.findById(id).get();
-                    post.setUser(user);
-                    postDao.save(post);
-                    user.addPost(post);
-                    userDao.save(user);
-                    return "redirect:/profile";
-                }
-            }
-        }
-        return "user/new-post";
-    }
-
-    @RequestMapping(value="forum", method= RequestMethod.GET)
-    public String forum(Model model) {
-
-        model.addAttribute("title", "Forum");
-
-        if(sessionDao.count() == 1) {
-           model.addAttribute("posts", postDao.findAll());
-           return "user/forum";
-        }
-
-
-        return "redirect:/login";
-    }
 }
 
 
