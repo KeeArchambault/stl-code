@@ -89,7 +89,7 @@ public class PostController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value="delete-post/")
+    @RequestMapping(value="delete-post/{id}")
     public String remove(Model model, @PathVariable int id){
 
         postDao.deleteById(id);
