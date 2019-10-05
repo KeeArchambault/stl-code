@@ -13,6 +13,7 @@
 <table th:each="post : *{posts}">
     <h3 th:text="${post.title}"></h3>
     <p th:text="${post.body}"></p>
+    <label for="date">Created:<p id="date" style="size: 5px; color: gray;" th:text="${post.created}"></p></label>
 </table>
 </div>
 
