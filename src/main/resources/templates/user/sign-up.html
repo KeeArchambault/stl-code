@@ -31,6 +31,7 @@
     <div class="form-group">
         <input class="form-control" type="password" th:field="*{verify}"/>
         <span th:errors="*{verify}" class="error"></span>
+        <span style="color: red;" th:text="${warning}"></span>
     </div>
 
     <input type="submit"/>

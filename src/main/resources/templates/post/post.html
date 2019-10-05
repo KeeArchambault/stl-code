@@ -6,7 +6,18 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<br>
+<h3 th:text="${post.title}"></h3>
 
+<p style="text-size: 5pt; color: gray" th:text="${post.user.name}"></p>
+
+<p th:text="${post.body}"></p>
+<p style="text-size: 5pt; color: gray;" name="date" th:text="${post.created}"></p>
+
+<form action="/delete-post">
+<input name="id" type="hidden" th:value="${post.id}">
+<input type="submit" value="Delete">
+</form>
 
 </body>
 </html>

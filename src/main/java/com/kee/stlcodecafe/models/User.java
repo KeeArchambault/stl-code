@@ -36,6 +36,8 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+
+
     @OneToOne
     private Session session;
 
@@ -89,4 +91,11 @@ public class User {
         this.verify = verify;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 }

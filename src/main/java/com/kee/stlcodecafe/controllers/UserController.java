@@ -40,15 +40,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLogin(Model model, @RequestParam String name, @RequestParam String password) {
+    public String processLogin(Model model, @RequestParam String loginName, @RequestParam String loginPassword) {
 
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-            if (user.getName().equals(name) && user.getPassword().equals(password)) {
+            if (user.getName().equals(loginName) && user.getPassword().equals(loginPassword)) {
                 Session session = new Session(user);
                 sessionDao.save(session);
-                return "redirect:/profile/"; //redirects to the appropriate user profile
+                return "redirect:/profile"; //redirects to the appropriate user profile
 
             } else {
                 model.addAttribute("errors", "Invalid login credentials.");
