@@ -103,17 +103,42 @@ public class PostController {
     return "redirect:/forum";
     }
 
-    @RequestMapping(value="add-comment/{id}")
-    public String addComment(Model model, @ModelAttribute @Valid Comment comment, @PathVariable int id) {
+//    @RequestMapping(value="add-comment/{id}", method = RequestMethod.GET)
+//    public String addComment(Model model, Comment comment, @PathVariable int id){
+//
+//        return "add-comment";
+//    }
+
+    @RequestMapping(value="add-comment/{id}", method = RequestMethod.POST)
+    public String addComment(Model model, @ModelAttribute @Valid Comment comment, Errors errors, @PathVariable int id) {
 
 //TODO fix comment functionality
-        commentDao.save(comment);
 
-        for (Post post : postDao.findAll()) {
-            if (post.getId() == id) {
-                post.addComment(comment);
-                postDao.save(post);
-                return "redirect:/forum";
+        if (errors.hasErrors()) {
+
+            return "redirect:";
+
+//            for (User existingUser : userDao.findAll()) {
+//                for (Session testSession : sessionDao.findAll()) {
+//                    if (existingUser.getId() == testSession.userId()) {
+//
+//                        model.addAttribute("user", existingUser);// passes the user id to the template to display the correct posts
+//                        return "user/profile";
+//                    }
+//                }
+//            }
+
+//            return "user/profile";
+        }else {
+
+            commentDao.save(comment);
+
+            for (Post post : postDao.findAll()) {
+                if (post.getId() == id) {
+                    post.addComment(comment);
+                    postDao.save(post);
+                    return "redirect:/forum";
+                }
             }
         }
 

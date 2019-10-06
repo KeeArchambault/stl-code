@@ -6,6 +6,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+
+
 <br>
 <h3 th:text="${post.title}"></h3>
 
@@ -14,19 +16,17 @@
 <p th:text="${post.body}"></p>
 <p style="text-size: 5pt; color: gray;" name="date" th:text="${post.created}"></p>
 
-<input name="postId" type="hidden" value="${post.id}"/>
-
-<form action="/add-comment" th:object="${comment}">
-<label th:for="commentBody">Add comment (500 characters max): </label>
-<textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
-<span th:errors="*{commentBody}" class="error"></span>
-
-    <a th:href="'/add-comment/' + ${post.id}">Add Comment</a>
+<form th:action="'/add-comment/' + ${post.id}" method="post" th:object="${comment}">
+    <label th:for="commentBody">Add comment (500 characters max): </label>
+    <textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
+    <span th:errors="*{commentBody}" class="error"></span>
+    <input name="id" type="hidden" th:value="${post.id}"/>
+    <input type="submit">
 </form>
 
-    <table th:each="comment : ${post.comments}">
+    <table th:each="postComment : ${post.comments}">
         <br>
-        <p th:text="${comment.commentBody}"></p>
+        <p th:text="${postComment.commentBody}"></p>
         <br>
     </table>
 
