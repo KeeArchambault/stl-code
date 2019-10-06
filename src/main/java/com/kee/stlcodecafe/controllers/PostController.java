@@ -5,6 +5,7 @@ import com.kee.stlcodecafe.models.Comment;
 import com.kee.stlcodecafe.models.Post;
 import com.kee.stlcodecafe.models.Session;
 import com.kee.stlcodecafe.models.User;
+import com.kee.stlcodecafe.models.data.CommentDao;
 import com.kee.stlcodecafe.models.data.PostDao;
 import com.kee.stlcodecafe.models.data.SessionDao;
 import com.kee.stlcodecafe.models.data.UserDao;
@@ -29,10 +30,14 @@ public class PostController {
     @Autowired
     private PostDao postDao;
 
+    @Autowired
+    private CommentDao commentDao;
+
     @RequestMapping(value="post/{id}", method = RequestMethod.GET)
     public String viewPost(Model model, @PathVariable int id, Comment comment){
 
         Post post = postDao.findById(id).get();
+        model.addAttribute("comment", comment);
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle());
 
@@ -99,9 +104,10 @@ public class PostController {
     }
 
     @RequestMapping(value="add-comment/{id}")
-    public String addComment(Model model, @ModelAttribute Comment comment, int id) {
+    public String addComment(Model model, @ModelAttribute @Valid Comment comment, @PathVariable int id) {
 
 //TODO fix comment functionality
+        commentDao.save(comment);
 
         for (Post post : postDao.findAll()) {
             if (post.getId() == id) {

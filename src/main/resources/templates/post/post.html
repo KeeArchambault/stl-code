@@ -17,17 +17,16 @@
 <input name="postId" type="hidden" value="${post.id}"/>
 
 <form action="/add-comment" th:object="${comment}">
-<label th:for="body">Add comment (500 characters max): </label>
-<textarea style="width: 500px;" name="body" class="form-control" th:fie="*{body}"></textarea>
-<span th:errors="*{body}" class="error"></span>
-<br>
-<br>
+<label th:for="commentBody">Add comment (500 characters max): </label>
+<textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
+<span th:errors="*{commentBody}" class="error"></span>
+
     <a th:href="'/add-comment/' + ${post.id}">Add Comment</a>
 </form>
 
     <table th:each="comment : ${post.comments}">
         <br>
-        <p th:text="${comment.body}"></p>
+        <p th:text="${comment.commentBody}"></p>
         <br>
     </table>
 

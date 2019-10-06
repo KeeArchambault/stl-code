@@ -15,7 +15,7 @@ public class Comment {
     @NotNull
     @Lob
     @Size(min = 1, max = 500, message = "Comment too long.")
-    private String body;
+    private String commentBody;
 
     @ManyToOne
     private Post post;
@@ -24,8 +24,8 @@ public class Comment {
 
     }
 
-    public Comment(String body) {
-        this.body = body;
+    public Comment(String commentBody) {
+        this.commentBody = commentBody;
     }
 
     public int getId() {
@@ -36,11 +36,11 @@ public class Comment {
         return post;
     }
 
-    public String getBody() {
-        return body;
+    public String getCommentBody() {
+        return commentBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setCommentBody(String commentBody) {
+        this.commentBody = commentBody;
     }
 }
