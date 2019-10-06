@@ -9,15 +9,16 @@
 
 
 <br>
-<h3 th:text="${post.title}"></h3>
 
-<p style="color: gray;" th:text="${post.user.name}"></p>
-
+<small style="color: gray;" th:inline="text"> by <small  th:text="${post.user.name}"/></small>
+<br>
+<br>
 <p th:text="${post.body}"></p>
-<small  style="color: gray;" name="date" th:inline="text">Created: <small th:text="${post.created}"/></small>
+<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${post.created}"/> </small>
+
     <br>
     <br>
-<h4>Comments:</h4>
+<h4 style="color: gray;" th:inline="text" >Comments (<small th:text="${post.comments.size()}"></small>)</h4>
 <form th:action="'/add-comment/' + ${post.id}" method="post" th:object="${comment}">
     <label th:for="commentBody">Add comment (500 characters max): </label>
     <textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
@@ -26,12 +27,11 @@
         <br>
     <input type="submit">
 </form>
-
+<br>
     <table th:each="postComment : ${post.comments}">
-        <br>
         <p th:text="${postComment.commentBody}"></p>
-        <br>
         <small  style="text-size: 5pt; color: gray" name="create" th:inline="text">Created: <small th:text="${postComment.created}"/></small>
+        <br>
         <br>
 <!--        <p th:text="${postComment.user.getName}"></p>-->
 

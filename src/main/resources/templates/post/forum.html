@@ -10,17 +10,17 @@
 <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
 <table th:each="post : ${posts}">
-    <a th:href="'/post/'+ ${post.id}"
+    <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}"
        th:text="${post.title}">
-    </a>
-    <br>
-    <p style="text-size: 5pt; color: gray" th:text="${post.user.name}"></p>
+    </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <small th:text="${post.user.name}"/></small></h3>
+
 
     <p th:text="${post.body}"></p>
-    <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${post.created}"></small>  |  </small>
-    <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments: <small th:text="${post.comments.size()}"></small>
+    <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${post.created}"/> | </small>
+    <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments: <small th:text="${post.comments.size()}"/></small>
 
     <br>
+
 
 </table>
 

@@ -62,6 +62,10 @@ public class Comment {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Date getCreated() {
         return created;
     }
