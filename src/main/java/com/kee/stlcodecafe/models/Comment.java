@@ -1,8 +1,11 @@
 package com.kee.stlcodecafe.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class Comment {
@@ -18,6 +21,18 @@ public class Comment {
 
     @ManyToOne
     private Post post;
+
+
+    @ManyToOne
+    User user;
+
+    @DateTimeFormat()
+    private Date created;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
 
     public Comment() {
 
@@ -41,5 +56,13 @@ public class Comment {
 
     public void setCommentBody(String commentBody) {
         this.commentBody = commentBody;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Date getCreated() {
+        return created;
     }
 }

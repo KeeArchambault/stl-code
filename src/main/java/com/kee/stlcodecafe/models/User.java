@@ -14,7 +14,7 @@ import java.util.List;
 public class User {
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min = 3, max = 15)
     private String name;
 
     @Id
@@ -26,28 +26,30 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min = 3, max = 15)
     private String password;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min = 3, max = 15)
     private String verify;
 
     @OneToMany
     private List<Post> posts;
 
 
+    @OneToMany
+    private List<Comment> comments;
 
     @OneToOne
     private Session session;
 
-    public User(){
+    public User() {
     }
 
-    public User(String name){
+    public User(String name) {
     }
 
-    public void addPost(Post post){
+    public void addPost(Post post) {
         posts.add(post);
     }
 
@@ -97,5 +99,13 @@ public class User {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

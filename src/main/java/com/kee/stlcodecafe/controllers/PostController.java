@@ -37,6 +37,7 @@ public class PostController {
     public String viewPost(Model model, @PathVariable int id, Comment comment){
 
         Post post = postDao.findById(id).get();
+
         model.addAttribute("comment", comment);
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle());
@@ -103,11 +104,6 @@ public class PostController {
     return "redirect:/forum";
     }
 
-//    @RequestMapping(value="add-comment/{id}", method = RequestMethod.GET)
-//    public String addComment(Model model, Comment comment, @PathVariable int id){
-//
-//        return "add-comment";
-//    }
 
     @RequestMapping(value="add-comment/{id}", method = RequestMethod.POST)
     public String addComment(Model model, @ModelAttribute @Valid Comment comment, Errors errors, @PathVariable int id) {
@@ -122,7 +118,7 @@ public class PostController {
 //                for (Session testSession : sessionDao.findAll()) {
 //                    if (existingUser.getId() == testSession.userId()) {
 //
-//                        model.addAttribute("user", existingUser);// passes the user id to the template to display the correct posts
+//                        model.addAttribute("user", existingUser);
 //                        return "user/profile";
 //                    }
 //                }
