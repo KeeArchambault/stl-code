@@ -14,9 +14,24 @@
 <p th:text="${post.body}"></p>
 <p style="text-size: 5pt; color: gray;" name="date" th:text="${post.created}"></p>
 
-<a th:href="'/delete-post/' + ${post.id}">Delete</a>
+<input name="postId" type="hidden" value="${post.id}"/>
 
+<form action="/add-comment" th:object="${comment}">
+<label th:for="body">Add comment (500 characters max): </label>
+<textarea style="width: 500px;" name="body" class="form-control" th:fie="*{body}"></textarea>
+<span th:errors="*{body}" class="error"></span>
+<br>
+<br>
+    <a th:href="'/add-comment/' + ${post.id}">Add Comment</a>
 </form>
+
+    <table th:each="comment : ${post.comments}">
+        <br>
+        <p th:text="${comment.body}"></p>
+        <br>
+    </table>
+
+
 
 </body>
 </html>

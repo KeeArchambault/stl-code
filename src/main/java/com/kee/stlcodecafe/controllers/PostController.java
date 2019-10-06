@@ -1,6 +1,7 @@
 package com.kee.stlcodecafe.controllers;
 
 
+import com.kee.stlcodecafe.models.Comment;
 import com.kee.stlcodecafe.models.Post;
 import com.kee.stlcodecafe.models.Session;
 import com.kee.stlcodecafe.models.User;
@@ -29,7 +30,7 @@ public class PostController {
     private PostDao postDao;
 
     @RequestMapping(value="post/{id}", method = RequestMethod.GET)
-    public String viewPost(Model model, @PathVariable int id){
+    public String viewPost(Model model, @PathVariable int id, Comment comment){
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
@@ -97,4 +98,19 @@ public class PostController {
     return "redirect:/forum";
     }
 
+    @RequestMapping(value="add-comment/{id}")
+    public String addComment(Model model, @ModelAttribute Comment comment, int id) {
+
+//TODO fix comment functionality
+
+        for (Post post : postDao.findAll()) {
+            if (post.getId() == id) {
+                post.addComment(comment);
+                postDao.save(post);
+                return "redirect:/forum";
+            }
+        }
+
+        return "redirect:";
+    }
 }

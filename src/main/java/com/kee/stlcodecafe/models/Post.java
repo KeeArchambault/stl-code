@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -28,9 +29,9 @@ public class Post {
     @ManyToOne
     private User user;
 
-    public Date getCreated() {
-        return created;
-    }
+
+    @OneToMany
+    private List<Comment> comments;
 
     @DateTimeFormat()
     private Date created;
@@ -46,6 +47,9 @@ public class Post {
     public Post(String title, String body){
         this.title = title;
         this.body = body;
+    }
+    public Date getCreated() {
+        return created;
     }
 
     public int getId() {
@@ -75,4 +79,14 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
 }
+
+

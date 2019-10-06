@@ -42,6 +42,8 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLogin(Model model, @RequestParam String loginName, @RequestParam String loginPassword) {
 
+//TODO fix login issue, multiple users can register but only the first can sign in again
+
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {

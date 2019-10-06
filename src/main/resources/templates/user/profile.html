@@ -20,6 +20,9 @@
     </a>
     <p th:text="${post.body}"></p>
     <p name="date" style="text-size: 5pt; color: gray;" th:text="${post.created}"></p>
+    <a th:href="'/delete-post/' + ${post.id}">Delete</a>
+    <br>
+    <br>
 </table>
 </div>
 
