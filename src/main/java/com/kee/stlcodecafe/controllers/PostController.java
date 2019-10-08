@@ -114,10 +114,13 @@ public class PostController extends AbstractController{
         }else {
 
             User user = getUserFromSession(request.getSession());
+
             comment.setUser(user);
             commentDao.save(comment);
+
             user.addComment(comment);
             userDao.save(user);
+
 
             for (Post post : postDao.findAll()) {
                 if (post.getId() == id) {
