@@ -67,7 +67,6 @@ public class PostController extends AbstractController{
 
         int id = user.getId();
 
-
         post.setUser(user);
         postDao.save(post);
         user.addPost(post);
@@ -77,14 +76,18 @@ public class PostController extends AbstractController{
     }
 
     @RequestMapping(value="forum", method= RequestMethod.GET)
-    public String forum(Model model) {
+    public String forum(HttpServletRequest request, Model model) {
 
 
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("title", "Forum");
 
-            model.addAttribute("posts", postDao.findAll());
-            return "post/forum";
+        model.addAttribute("posts", postDao.findAll());
+        return "post/forum";
+
 
     }
 
@@ -113,7 +116,7 @@ public class PostController extends AbstractController{
             commentDao.save(comment);
             user.addComment(comment);
             userDao.save(user);
-            int userid = request.getSession().getId();
+            String username = user.getName();
 
             for (Post post : postDao.findAll()) {
                 if (post.getId() == id) {

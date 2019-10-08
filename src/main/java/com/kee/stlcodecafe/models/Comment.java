@@ -15,7 +15,6 @@ public class Comment {
     private int id;
 
     @NotNull
-    @Lob
     @Size(min = 1, max = 500, message = "Comment too long.")
     private String commentBody;
 
