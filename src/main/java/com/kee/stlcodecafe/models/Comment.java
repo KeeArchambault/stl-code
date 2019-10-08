@@ -22,9 +22,8 @@ public class Comment {
     @ManyToOne
     private Post post;
 
-
     @ManyToOne
-    User user;
+    private User user;
 
     @DateTimeFormat()
     private Date created;

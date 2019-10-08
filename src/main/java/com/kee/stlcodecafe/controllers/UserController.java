@@ -1,30 +1,22 @@
 package com.kee.stlcodecafe.controllers;
 
-import com.kee.stlcodecafe.models.Post;
-import com.kee.stlcodecafe.models.Session;
 import com.kee.stlcodecafe.models.User;
 import com.kee.stlcodecafe.models.data.PostDao;
-import com.kee.stlcodecafe.models.data.SessionDao;
 import com.kee.stlcodecafe.models.data.UserDao;
-import com.kee.stlcodecafe.models.forms.AddPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 
 @Controller
 @RequestMapping(value="")
-public class UserController {
-
-    @Autowired
-    private SessionDao sessionDao;
+public class UserController extends AbstractController{
 
     @Autowired
     private UserDao userDao;
@@ -40,51 +32,54 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLogin(Model model, @RequestParam String loginName, @RequestParam String loginPassword) {
+    public String processLogin(HttpServletRequest request, Model model, @RequestParam String username, @RequestParam String password) {
 
 //TODO fix login issue, multiple users can register but only the first can sign in again
 
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-            if (user.getName().equals(loginName) && user.getPassword().equals(loginPassword)) {
-                Session session = new Session(user);
-                sessionDao.save(session);
-                return "redirect:/profile"; //redirects to the appropriate user profile
+            if (user.getName().equals(username)) {
+                if (user.getPassword().equals(password)) {
+                    setUserInSession(request.getSession(), user);
+                    model.addAttribute("user", user);
 
-            } else {
-                model.addAttribute("errors", "Invalid login credentials.");
-                return "user/login";
+//TODO implement login
+
+                } else {
+                    model.addAttribute("errors", "Invalid login credentials.");
+                    return "user/login";
+                }
             }
-        }
 
-        model.addAttribute("errors", "");
-        return "user/login";
+        }
+        return "redirect:/profile";
     }
 
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public String logout(Model model) {
-        sessionDao.deleteAll();
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
 
         return "redirect:/login";
     }
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
-    public String profile(Model model) {
+    public String profile(HttpServletRequest request, Model model) {
 
-        model.addAttribute("title", "Profile");
+        if(getUserFromSession(request.getSession()) == null){
+            return "redirect:/login";
 
-        for (User existingUser : userDao.findAll()) {
-            for (Session testSession : sessionDao.findAll()) {
-                if (existingUser.getId() == testSession.userId()) {
+        }else {
 
-                    model.addAttribute("user", existingUser);// passes the user id to the template to display the correct posts
-                    return "user/profile";
-                }
-            }
+            User user = getUserFromSession(request.getSession());
+            model.addAttribute("user", user);
+            model.addAttribute("title", "Profile");
+
+            return "user/profile";
         }
-        return "redirect:/login";
+
+
     }
 
     @RequestMapping(value = "sign-up", method = RequestMethod.GET)
@@ -98,7 +93,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "sign-up", method = RequestMethod.POST)
-    public String processSignUp(Model model, @ModelAttribute @Valid User user, Errors errors) {
+    public String processSignUp(HttpServletRequest request, Model model, @ModelAttribute @Valid User user, Errors errors) {
 
         if (errors.hasErrors() || !user.getPassword().equals(user.getVerify())) {
 
@@ -106,8 +101,7 @@ public class UserController {
 
         } else {
             userDao.save(user);
-            Session session = new Session(user);
-            sessionDao.save(session);
+            setUserInSession(request.getSession(), user);
             model.addAttribute("posts", user.getPosts());
             model.addAttribute("user", user);
 

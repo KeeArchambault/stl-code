@@ -40,9 +40,6 @@ public class User {
     @OneToMany
     private List<Comment> comments;
 
-    @OneToOne
-    private Session session;
-
     public User() {
     }
 
@@ -93,19 +90,12 @@ public class User {
         this.verify = verify;
     }
 
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
 
     public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value="")
-public class HomeController {
+public class HomeController extends AbstractController{
 
 
     @Autowired

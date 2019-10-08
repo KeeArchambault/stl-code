@@ -31,6 +31,7 @@
     <table th:each="postComment : ${post.comments}">
         <p th:text="${postComment.commentBody}"></p>
         <small  style="text-size: 5pt; color: gray" name="create" th:inline="text">Created: <small th:text="${postComment.created}"/></small>
+        <small style="color: gray;" th:inline="text"> by <small  th:text="${username}"/></small>
         <br>
         <br>
 <!--        <p th:text="${postComment.user.getName}"></p>-->
