@@ -18,6 +18,7 @@ public abstract class AbstractController {
 
         public static final String userSessionKey = "id";
 
+
         protected User getUserFromSession(HttpSession session) {
 
             Integer id = (Integer) session.getAttribute(userSessionKey);
@@ -27,7 +28,5 @@ public abstract class AbstractController {
         protected void setUserInSession(HttpSession session, User user) {
             session.setAttribute(userSessionKey, user.getId());
         }
-
-
 
 }

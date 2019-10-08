@@ -18,6 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Enumeration;
 
 @Controller
 @RequestMapping(value="")
@@ -113,10 +114,10 @@ public class PostController extends AbstractController{
         }else {
 
             User user = getUserFromSession(request.getSession());
+            comment.setUser(user);
             commentDao.save(comment);
             user.addComment(comment);
             userDao.save(user);
-            String username = user.getName();
 
             for (Post post : postDao.findAll()) {
                 if (post.getId() == id) {
