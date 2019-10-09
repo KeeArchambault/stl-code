@@ -29,6 +29,8 @@ public class SearchController extends AbstractController{
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String searchResults(Model model, @RequestParam String searchTerm){
 
+        model.addAttribute("title", "Search Results");
+
         List<Post> results = new ArrayList<Post>();
 
         for (Post post : postDao.findAll()){

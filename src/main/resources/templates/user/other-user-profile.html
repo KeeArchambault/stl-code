@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="'Posts by ' + *{user.name}"></h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<a href="/message">Message</a>
+
+<br>
+<div class="form-group" th:object="${user}">
+    <table th:each="post : *{posts}">
+
+        <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}" th:text="${post.title}"/></h3>
+        <p th:text="${post.body}"></p>
+        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${post.created}"/> | </small>
+        <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments: <small th:text="${post.comments.size()}"/> | </small>
+        <a th:href="'/delete-post/' + ${post.id}">Delete</a>
+        <br>
+        <br>
+    </table>
+</div>
+</body>
+</html>

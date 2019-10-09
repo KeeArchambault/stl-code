@@ -2,15 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="*{user.name}"></h1>
+<h1 th:text="'Posts by ' + *{user.name}"></h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<br>
 <a href="/new-post">New Post</a> |
 <a href="/logout">Log Out</a>
 
-<br>
 <div class="form-group" th:object="${user}">
 <table th:each="post : *{posts}">
 

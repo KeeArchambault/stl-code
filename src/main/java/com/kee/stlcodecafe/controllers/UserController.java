@@ -38,18 +38,14 @@ public class UserController extends AbstractController {
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-            if (user.getName().equals(username)) {
-                if (user.getPassword().equals(password)) {
-                    setUserInSession(request.getSession(), user);
-                    model.addAttribute("user", user);
-
-                } else {
-                        model.addAttribute("errors", "Invalid login credentials.");
-                        return "user/login";
-                }
+            if (user.getName().equals(username) && user.getPassword().equals(password)) {
+                setUserInSession(request.getSession(), user);
+                model.addAttribute("user", user);
+                return "redirect:/profile";
             }
         }
-        return "redirect:/profile";
+        model.addAttribute("errors", "Invalid login credentials.");
+        return "user/login";
     }
 
 
@@ -62,8 +58,6 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model) {
-
-        model.addAttribute("title", "Profile");
 
         if(getUserFromSession(request.getSession()) == null){
             return "redirect:/login";
@@ -83,7 +77,7 @@ public class UserController extends AbstractController {
         User user = userDao.findById(id).get();
 
         model.addAttribute("user", user);
-        return "user/profile";
+        return "user/other-user-profile";
 
     }
 
