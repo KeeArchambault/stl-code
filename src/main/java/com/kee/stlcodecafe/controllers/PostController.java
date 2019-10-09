@@ -18,7 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Enumeration;
+import java.util.*;
 
 @Controller
 @RequestMapping(value="")
@@ -79,14 +79,17 @@ public class PostController extends AbstractController{
     @RequestMapping(value="forum", method= RequestMethod.GET)
     public String forum(HttpServletRequest request, Model model) {
 
+        model.addAttribute("title", "All Posts");
 
         if(getUserFromSession(request.getSession()) == null) {
             return "redirect:/login";
         }
 
-        model.addAttribute("title", "All Posts");
+        // places all posts in a list and then reverses the list so that they are displayed from oldest to newest
+        List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) postDao.findAll());
+        Collections.reverse(posts);
 
-        model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("posts", posts);
         return "post/forum";
 
 

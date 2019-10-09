@@ -1,5 +1,6 @@
 package com.kee.stlcodecafe.controllers;
 
+import com.kee.stlcodecafe.models.Post;
 import com.kee.stlcodecafe.models.User;
 import com.kee.stlcodecafe.models.data.PostDao;
 import com.kee.stlcodecafe.models.data.UserDao;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 @Controller
@@ -65,6 +70,9 @@ public class UserController extends AbstractController {
         }else {
 
             User user = getUserFromSession(request.getSession());
+            List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
+
+            model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             return "user/profile";
         }
