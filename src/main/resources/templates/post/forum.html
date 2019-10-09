@@ -12,7 +12,7 @@
 <table th:each="post : ${posts}">
     <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}"
        th:text="${post.title}">
-    </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <small th:text="${post.user.name}"/></small></h3>
+    </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'profile/' + ${post.user.id}" th:text="${post.user.name}"/></small></h3>
 
 
     <p th:text="${post.body}"></p>
