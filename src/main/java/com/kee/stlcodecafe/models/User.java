@@ -39,6 +39,12 @@ public class User {
     @OneToMany
     private List<Comment> comments;
 
+    @OneToMany
+    private List<Message> sentMessages;
+
+    @OneToMany
+    private List<Message> receivedMessages;
+
     public User() {
     }
 
@@ -96,5 +102,23 @@ public class User {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void addToSentMessages(Message message){
+        sentMessages.add(message);
+
+    }
+
+    public void addToReceivedMessages(Message message){
+        sentMessages.add(message);
+
     }
 }
