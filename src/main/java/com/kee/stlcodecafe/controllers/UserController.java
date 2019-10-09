@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="")
-public class UserController extends AbstractController{
+public class UserController extends AbstractController {
 
     @Autowired
     private UserDao userDao;
@@ -28,30 +28,24 @@ public class UserController extends AbstractController{
     public String login(Model model) {
 
         model.addAttribute("title", "Log In");
+
         return "user/login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLogin(HttpServletRequest request, Model model, @RequestParam String username, @RequestParam String password) {
 
-//TODO fix login issue, multiple users can register but only the first can sign in again
-
         model.addAttribute("title", "Log In");
 
         for (User user : userDao.findAll()) {
-            if (user.getName().equals(username)) {
-                if (user.getPassword().equals(password)) {
-                    setUserInSession(request.getSession(), user);
-                    model.addAttribute("user", user);
+            if (user.getName().equals(username) && user.getPassword().equals(password)) {
+                setUserInSession(request.getSession(), user);
+                model.addAttribute("user", user);
 
-//TODO implement login
-
-                } else {
-                    model.addAttribute("errors", "Invalid login credentials.");
-                    return "user/login";
-                }
+            } else {
+                model.addAttribute("errors", "Invalid login credentials.");
+                return "user/login";
             }
-
         }
         return "redirect:/profile";
     }
@@ -59,13 +53,15 @@ public class UserController extends AbstractController{
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
-        request.getSession().invalidate();
 
+        request.getSession().invalidate();
         return "redirect:/login";
     }
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model) {
+
+        model.addAttribute("title", "Profile");
 
         if(getUserFromSession(request.getSession()) == null){
             return "redirect:/login";
@@ -74,11 +70,8 @@ public class UserController extends AbstractController{
 
             User user = getUserFromSession(request.getSession());
             model.addAttribute("user", user);
-            model.addAttribute("title", "Profile");
-
             return "user/profile";
         }
-
 
     }
 
@@ -88,7 +81,6 @@ public class UserController extends AbstractController{
         model.addAttribute("title", "Sign Up");
 
         model.addAttribute("user", user);
-
         return "user/sign-up";
     }
 
@@ -98,15 +90,36 @@ public class UserController extends AbstractController{
         if (errors.hasErrors() || !user.getPassword().equals(user.getVerify())) {
 
             return "user/sign-up";
-
-        } else {
-            userDao.save(user);
-            setUserInSession(request.getSession(), user);
-            model.addAttribute("posts", user.getPosts());
-            model.addAttribute("user", user);
-
-            return "redirect:/profile";
         }
+        for(User existingUser : userDao.findAll()){
+            if (user.getName().equals(existingUser.getName())) {
+
+                model.addAttribute("usernameError", "Account with that username already exists.");
+                return "user/sign-up";
+
+            }
+        }
+        for(User existingUser : userDao.findAll()){
+            if (user.getEmail().equals(existingUser.getEmail())) {
+
+                model.addAttribute("emailError", "Account with that email already exists.");
+                return "user/sign-up";
+
+            }
+        }
+
+        if (!user.getPassword().equals(user.getVerify())) {
+
+            model.addAttribute("passwordError", "Passwords do not match.");
+            return "user/sign-up";
+        }
+
+        userDao.save(user);
+        setUserInSession(request.getSession(), user);
+        model.addAttribute("posts", user.getPosts());
+        model.addAttribute("user", user);
+
+        return "redirect:/profile";
     }
 
 }

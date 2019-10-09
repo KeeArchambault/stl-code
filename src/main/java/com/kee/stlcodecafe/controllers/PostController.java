@@ -84,7 +84,7 @@ public class PostController extends AbstractController{
             return "redirect:/login";
         }
 
-        model.addAttribute("title", "Forum");
+        model.addAttribute("title", "All Posts");
 
         model.addAttribute("posts", postDao.findAll());
         return "post/forum";

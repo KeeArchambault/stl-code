@@ -13,24 +13,23 @@ import java.util.List;
 @Entity
 public class User {
 
-    @NotNull
-    @Size(min = 3, max = 15)
-    private String name;
-
     @Id
     @GeneratedValue
     private int id;
+
+    @NotNull
+    @Size(min = 3, max = 15, message = "Name length must be between 3 and 15 characters.")
+    private String name;
 
     @Email
     @NotNull
     private String email;
 
     @NotNull
-    @Size(min = 3, max = 15)
+    @Size(min = 3, max = 15, message = "Password length must be between 3 and 15 characters.")
     private String password;
 
     @NotNull
-    @Size(min = 3, max = 15)
     private String verify;
 
     @OneToMany
