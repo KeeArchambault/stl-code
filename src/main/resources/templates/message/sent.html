@@ -6,7 +6,20 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--TODO display sent messages-->
+<p th:unless="${messages} and ${messages.size()}">No messages.</p>
+
+<div>
+    <table th:each="message : ${messages}">
+        <h3 th:inline="text"><a th:href="'/sent-message/'+ ${message.id}"
+                                th:text="${message.subject}">
+        </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
+        <p th:text="${message.body}"></p>
+        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"></small> | </small>
+        <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+        <br>
+        <br>
+    </table>
+</div>
 
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,29 +57,74 @@ public class MessageController extends AbstractController {
     @RequestMapping("inbox")
     public String inbox(HttpServletRequest request, Model model){
 
+        model.addAttribute("title", "Inbox");
+
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
+
         List<Message> messages = new ArrayList<Message>() {
         };
         User sessionUser = getUserFromSession(request.getSession());
         int userId = sessionUser.getId();
 
         for(Message message : messageDao.findAll()){
-            if(userId == message.getRecipient().getId());
+            if(userId == message.getRecipient().getId()) {
                 messages.add(message);
+            }
         }
+
+        Collections.reverse(messages);
+
         model.addAttribute("messages", messages);
 
         return "message/inbox";
 
     }
 
-    @RequestMapping(value="message/{id}")
-    public String viewMessage(Model model, @PathVariable int id){
+    @RequestMapping(value="sent")
+    public String sent(HttpServletRequest request, Model model) {
+
+        model.addAttribute("title", "Sent Messages");
+
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
+        List<Message> messages = new ArrayList<Message>() {
+        };
+        User sessionUser = getUserFromSession(request.getSession());
+        int userId = sessionUser.getId();
+
+        for(Message message : messageDao.findAll()) {
+            if (userId == message.getSender().getId()) {
+                messages.add(message);
+            }
+        }
+        Collections.reverse(messages);
+
+        model.addAttribute("messages", messages);
+
+        return "message/sent";
+    }
+
+    @RequestMapping(value="received-message/{id}")
+    public String viewReceivedMessage(Model model, @PathVariable int id){
 
         Message message = messageDao.findById(id).get();
 
         model.addAttribute("message", message);
 
-        return "message/message";
+        return "message/received-message";
+    }
+
+    @RequestMapping(value="sent-message/{id}")
+    public String viewSentMessage(Model model, @PathVariable int id){
+
+        Message message = messageDao.findById(id).get();
+
+        model.addAttribute("message", message);
+
+        return "message/sent-message";
     }
 
 //    TODO add route to display sent messages
