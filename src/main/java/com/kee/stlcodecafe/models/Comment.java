@@ -18,7 +18,6 @@ public class Comment {
     @Size(min = 1, max = 500, message = "Comment too long.")
     private String commentBody;
 
-
     @ManyToOne
     private Post post;
 

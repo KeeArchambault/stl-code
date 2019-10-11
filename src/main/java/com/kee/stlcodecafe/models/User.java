@@ -10,8 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Table(name = "sent")
-@SecondaryTable(name = "received")
 @Entity
 public class User {
 
