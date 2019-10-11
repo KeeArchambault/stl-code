@@ -100,7 +100,7 @@ public class PostController extends AbstractController{
 
         postDao.deleteById(id);
 
-    return "redirect:/forum";
+    return "redirect:/profile";
     }
 
 
@@ -112,7 +112,6 @@ public class PostController extends AbstractController{
         if (errors.hasErrors()) {
 
             return "redirect:";
-
 
         }else {
 
@@ -127,6 +126,10 @@ public class PostController extends AbstractController{
 
             for (Post post : postDao.findAll()) {
                 if (post.getId() == id) {
+
+                    comment.setPost(post);
+                    commentDao.save(comment);
+
                     post.addComment(comment);
                     postDao.save(post);
                     return "redirect:/forum";

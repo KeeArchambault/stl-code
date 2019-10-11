@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!--TODO display a single message, include reply form-->
+<h3 th:inline ="text" th:text="${message.subject}"/>
+<small style="text-size: 5pt; color: gray" th:inline="text"> from <a th:href="'../profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
+<br>
+<p th:text="${message.body}"></p>
+<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${message.created}"/> </small>
+
+<br>
+
+</table>
+
+
+</body>
+</html>

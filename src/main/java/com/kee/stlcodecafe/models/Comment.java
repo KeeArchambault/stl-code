@@ -48,6 +48,9 @@ public class Comment {
         return post;
     }
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
     public String getCommentBody() {
         return commentBody;
     }

@@ -70,9 +70,8 @@ public class UserController extends AbstractController {
         }else {
 
             User user = getUserFromSession(request.getSession());
-            List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
 
-            model.addAttribute("posts", posts);
+            model.addAttribute("posts", user.getPosts());
             model.addAttribute("user", user);
             return "user/profile";
         }

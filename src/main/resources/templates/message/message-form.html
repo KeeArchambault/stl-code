@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="'Send a message to ' + ${recipientName}"></h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" th:action="'/message/'+ ${recipientId} + '/' + ${senderId}" th:object="${message}">
+    <label th:for="subject">Subject:</label>
+        <br>
+    <input style="width: 500px;" type="text" name="subject" class="form-control" th:field="*{subject}"/>
+    <span th:errors="*{subject}" class="error"></span>
+        <br>
+        <br>
+    <label th:for="body">Message (500 characters max): </label>
+    <textarea style="width: 500px;" name="body" class="form-control" th:field="*{body}"></textarea>
+    <span th:errors="*{body}" class="error"></span>
+    <intput type="hidden" name="recipientId" th:value="${recipientId}"></intput>
+    <intput type="hidden" name="senderId" th:value="${senderId}"></intput>
+        <br>
+        <br>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>
