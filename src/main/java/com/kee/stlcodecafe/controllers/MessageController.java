@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,13 +63,37 @@ public class MessageController extends AbstractController {
         int userId = sessionUser.getId();
 
         for(Message message : messageDao.findAll()){
-            if(userId == message.getRecipient().getId());
+            if(userId == message.getRecipient().getId()) {
                 messages.add(message);
+            }
         }
+
+        Collections.reverse(messages);
+
         model.addAttribute("messages", messages);
 
         return "message/inbox";
 
+    }
+
+    @RequestMapping("sent")
+    public String sent(HttpServletRequest request, Model model) {
+
+        List<Message> messages = new ArrayList<Message>() {
+        };
+        User sessionUser = getUserFromSession(request.getSession());
+        int userId = sessionUser.getId();
+
+        for(Message message : messageDao.findAll()) {
+            if (userId == message.getSender().getId()) {
+                messages.add(message);
+            }
+        }
+        Collections.reverse(messages);
+
+        model.addAttribute("messages", messages);
+
+        return "message/sent";
     }
 
     @RequestMapping(value="message/{id}")

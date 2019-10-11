@@ -6,11 +6,11 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<div class="form-group" th:object="${user}">
-
+<div>
     <table th:each="message : ${messages}">
-        <h3 th:inline="text"><a th:href="'/message/'+ ${message.id}" th:text="${message.subject}"></a></h3>
-        <small style="text-size: 5pt; color: gray" th:inline="text">from <a th:href="'/profile/'+ ${message.sender.id}" th:text="${message.sender.name}"></a></small>
+        <h3 th:inline="text"><a th:href="'/message/'+ ${message.id}"
+                                th:text="${message.subject}">
+        </a><small style="text-size: 5pt; color: gray" th:inline="text">  from <a th:href="'profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
         <p th:text="${message.body}"></p>
         <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"></small> | </small>
         <a th:href="'/delete-message/' + ${message.id}">Delete</a>

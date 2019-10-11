@@ -6,7 +6,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--TODO display a single message, include reply form-->
+<!--TODO include reply form-->
 <h3 th:inline ="text" th:text="${message.subject}"/>
 <small style="text-size: 5pt; color: gray" th:inline="text"> from <a th:href="'../profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
 <br>
