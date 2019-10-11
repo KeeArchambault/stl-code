@@ -1,6 +1,7 @@
 package com.kee.stlcodecafe.controllers;
 
 import com.kee.stlcodecafe.models.Message;
+import com.kee.stlcodecafe.models.Post;
 import com.kee.stlcodecafe.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "")
@@ -31,22 +35,41 @@ public class MessageController extends AbstractController {
         User recipient = userDao.findById(recipientId).get();
         User sender = userDao.findById(senderId).get();
 
+        message.setRecipient(recipient);
+        message.setSender(sender);
         messageDao.save(message);
 
-        recipient.addToReceivedMessages(message);
-        userDao.save(recipient);
-
-        sender.addToSentMessages(message);
-        userDao.save(sender);
+//        message.setSender_recipient(sender, recipient);
+//
+//        recipient.addToReceivedMessages(message);
+//        userDao.save(recipient);
+//
+//        sender.addToSentMessages(message);
+//        userDao.save(sender);
 
         return "redirect:/profile/" + recipientId;
 
     }
 
-//    TODO add route to process new messages
-
 //    TODO add route display received messages
 
+    @RequestMapping("inbox")
+    public String inbox(HttpServletRequest request, Model model){
+
+        List<Message> messages = new ArrayList<Message>() {
+        };
+        User sessionUser = getUserFromSession(request.getSession());
+        int userId = sessionUser.getId();
+
+        for(Message message : messageDao.findAll()){
+            if(userId == message.getRecipient().getId());
+                messages.add(message);
+        }
+        model.addAttribute("messages", messages);
+
+        return "message/inbox";
+
+    }
 //    TODO add route to display sent messages
 
 

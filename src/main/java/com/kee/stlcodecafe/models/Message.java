@@ -15,11 +15,11 @@ public class Message {
     @GeneratedValue
     private int id;
 
-    @ManyToMany(mappedBy = "receivedMessages")
-    private List<User> recipients;
+    @ManyToOne
+    private User recipient;
 
-    @ManyToMany(mappedBy = "sentMessages")
-    private List<User> senders;
+    @ManyToOne
+    private User sender;
 
     @NotNull
     @Size(min=1, max=15)
@@ -48,14 +48,6 @@ public class Message {
     public Message(String subject, String body){
     }
 
-    public List<User> getRecipients() {
-        return recipients;
-    }
-
-    public List<User> getSenders() {
-        return senders;
-    }
-
 
     public String getSubject() {
         return subject;
@@ -76,4 +68,21 @@ public class Message {
     public Date getCreated() {
         return created;
     }
+
+    public User getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
 }

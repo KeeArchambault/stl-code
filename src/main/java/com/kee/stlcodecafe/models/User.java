@@ -39,11 +39,12 @@ public class User {
     @OneToMany
     private List<Comment> comments;
 
-    @ManyToMany
-    private List<Message> receivedMessages;
+//    @OneToMany
+//    private List<Message> Messages;
 
-    @ManyToMany
-    private List<Message> sentMessages;
+//    private List<Message> receivedMessages;
+//
+//    private List<Message> sentMessages;
 
     public User() {
     }
@@ -104,21 +105,21 @@ public class User {
         this.comments.add(comment);
     }
 
-    public List<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public List<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void addToSentMessages(Message message){
-        sentMessages.add(message);
-
-    }
-
-    public void addToReceivedMessages(Message message){
-        sentMessages.add(message);
-
-    }
+//    public List<Message> getSentMessages() {
+//        return sentMessages;
+//    }
+//
+//    public List<Message> getReceivedMessages() {
+//        return receivedMessages;
+//    }
+//
+//    public void addToSentMessages(Message message){
+//        sentMessages.add(message);
+//
+//    }
+//
+//    public void addToReceivedMessages(Message message){
+//        sentMessages.add(message);
+//
+//    }
 }
