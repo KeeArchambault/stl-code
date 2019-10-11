@@ -18,6 +18,7 @@ public class Comment {
     @Size(min = 1, max = 500, message = "Comment too long.")
     private String commentBody;
 
+
     @ManyToOne
     private Post post;
 
@@ -48,6 +49,9 @@ public class Comment {
         return post;
     }
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
     public String getCommentBody() {
         return commentBody;
     }

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.kee.stlcodecafe.models.User;
+import com.kee.stlcodecafe.models.data.MessageDao;
 import com.kee.stlcodecafe.models.data.PostDao;
 import com.kee.stlcodecafe.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public abstract class AbstractController {
 
         @Autowired
         protected PostDao postDao;
+
+        @Autowired
+        protected MessageDao messageDao;
 
         public static final String userSessionKey = "id";
 

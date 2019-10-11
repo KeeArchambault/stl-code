@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+@Table(name = "sent")
+@SecondaryTable(name = "received")
 @Entity
 public class User {
 
@@ -39,11 +41,11 @@ public class User {
     @OneToMany
     private List<Comment> comments;
 
-    @OneToMany
-    private List<Message> sentMessages;
-
-    @OneToMany
+    @ManyToMany
     private List<Message> receivedMessages;
+
+    @ManyToMany
+    private List<Message> sentMessages;
 
     public User() {
     }
