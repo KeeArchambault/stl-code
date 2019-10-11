@@ -6,7 +6,6 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<br>
 <p th:unless="${results} and ${results.size()}">No results.</p>
 
 <table th:each="result: ${results}">
