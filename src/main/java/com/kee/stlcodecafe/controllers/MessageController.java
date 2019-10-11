@@ -57,6 +57,12 @@ public class MessageController extends AbstractController {
     @RequestMapping("inbox")
     public String inbox(HttpServletRequest request, Model model){
 
+        model.addAttribute("title", "Inbox");
+
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
+
         List<Message> messages = new ArrayList<Message>() {
         };
         User sessionUser = getUserFromSession(request.getSession());
@@ -76,9 +82,14 @@ public class MessageController extends AbstractController {
 
     }
 
-    @RequestMapping("sent")
+    @RequestMapping(value="sent")
     public String sent(HttpServletRequest request, Model model) {
 
+        model.addAttribute("title", "Sent Messages");
+
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
         List<Message> messages = new ArrayList<Message>() {
         };
         User sessionUser = getUserFromSession(request.getSession());
@@ -96,14 +107,24 @@ public class MessageController extends AbstractController {
         return "message/sent";
     }
 
-    @RequestMapping(value="message/{id}")
-    public String viewMessage(Model model, @PathVariable int id){
+    @RequestMapping(value="received-message/{id}")
+    public String viewReceivedMessage(Model model, @PathVariable int id){
 
         Message message = messageDao.findById(id).get();
 
         model.addAttribute("message", message);
 
-        return "message/message";
+        return "message/received-message";
+    }
+
+    @RequestMapping(value="sent-message/{id}")
+    public String viewSentMessage(Model model, @PathVariable int id){
+
+        Message message = messageDao.findById(id).get();
+
+        model.addAttribute("message", message);
+
+        return "message/sent-message";
     }
 
 //    TODO add route to display sent messages
