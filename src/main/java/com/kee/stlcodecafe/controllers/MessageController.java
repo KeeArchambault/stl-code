@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping(value = "")
 public class MessageController extends AbstractController {
 
-    @RequestMapping(value = "message/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "send-message/{id}", method = RequestMethod.GET)
     public String displayMessageForm(HttpServletRequest request, Model model, Message message, @PathVariable int id){
 
         int senderId = getUserFromSession(request.getSession()).getId();
@@ -29,7 +29,7 @@ public class MessageController extends AbstractController {
         return "message/message-form";
     }
 
-    @RequestMapping(value = "message/{recipientId}/{senderId}")
+    @RequestMapping(value = "send-message/{recipientId}/{senderId}")
     public String processMessageForm(Model model, @ModelAttribute @Valid Message message, @PathVariable int recipientId, @PathVariable int senderId){
 
         User recipient = userDao.findById(recipientId).get();
@@ -70,6 +70,17 @@ public class MessageController extends AbstractController {
         return "message/inbox";
 
     }
+
+    @RequestMapping(value="message/{id}")
+    public String viewMessage(Model model, @PathVariable int id){
+
+        Message message = messageDao.findById(id).get();
+
+        model.addAttribute("message", message);
+
+        return "message/message";
+    }
+
 //    TODO add route to display sent messages
 
 
