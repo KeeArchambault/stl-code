@@ -25,7 +25,7 @@ public class MessageController extends AbstractController {
 
         model.addAttribute("recipientId", id);
         model.addAttribute("senderId", senderId);
-        model.addAttribute("recipientName", userDao.findById(id).get().getName());
+        model.addAttribute("title", "Send a Message to " + userDao.findById(id).get().getName());
 
         return "message/message-form";
     }
@@ -77,6 +77,7 @@ public class MessageController extends AbstractController {
         Collections.reverse(messages);
 
         model.addAttribute("messages", messages);
+        model.addAttribute("userId", userId);
 
         return "message/inbox";
 

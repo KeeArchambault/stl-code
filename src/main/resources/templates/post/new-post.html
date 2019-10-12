@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
+
+<div class="container">
 <br>
 <form method="post" class="form-group" th:object="${post}">
 
@@ -22,6 +23,7 @@
     <input type="submit"/>
 
 </form>
-
+</div>
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

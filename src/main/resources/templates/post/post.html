@@ -2,19 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
 
 
 <br>
-
-<small style="color: gray;" th:inline="text"> by <small  th:text="${post.user.name}"/></small>
-<br>
+<div class="container">
+    <h4 style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'../profile/' + ${post.user.id}" th:text="${post.user.name}"/></h4>
 <br>
 <p th:text="${post.body}"></p>
-<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${post.created}"/> </small>
+<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> </small>
+
 
     <br>
     <br>
@@ -30,14 +29,14 @@
 <br>
     <table th:each="postComment : ${post.comments}">
         <p th:text="${postComment.commentBody}"></p>
-        <small  style="text-size: 5pt; color: gray" name="create" th:inline="text">Created: <small th:text="${postComment.created}"/></small>
-        <small style="color: gray;" th:inline="text"> by <small  th:text="${postComment.user.name}"/></small>
+        <small  style="text-size: 5pt; color: gray" name="create" th:inline="text">Created <small th:text="${postComment.created}"/> | </small>
+        <small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'../profile/' + ${post.user.id}" th:text="${post.user.name}"/></small>
         <br>
         <br>
 
     </table>
+</div>
 
-
-
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

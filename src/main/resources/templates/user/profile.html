@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="'Posts by ' + ${user.name}"></h1>
+<!--<h1 th:text="'Posts by ' + ${user.name}"></h1>-->
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<a href="/new-post">New Post</a> |
-<a href="/logout">Log Out</a>
+<div class="container">
+    <br>
+    <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
-<div class="form-group">
 <table th:each="post : ${posts}">
 
     <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}" th:text="${post.title}"/></h3>
@@ -25,6 +25,6 @@
 
 
 
-
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

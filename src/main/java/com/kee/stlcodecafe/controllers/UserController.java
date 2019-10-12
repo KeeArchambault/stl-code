@@ -73,6 +73,7 @@ public class UserController extends AbstractController {
 
             model.addAttribute("posts", user.getPosts());
             model.addAttribute("user", user);
+            model.addAttribute("title", "Posts by Me");
             return "user/profile";
         }
 
@@ -84,6 +85,7 @@ public class UserController extends AbstractController {
         User user = userDao.findById(id).get();
 
         model.addAttribute("user", user);
+        model.addAttribute("title", user.getName());
         return "user/other-user-profile";
 
     }

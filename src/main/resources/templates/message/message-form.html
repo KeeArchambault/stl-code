@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="'Send a message to ' + ${recipientName}"></h1>
+
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" th:action="'/message/'+ ${recipientId} + '/' + ${senderId}" th:object="${message}">
+<div class="container">
+    <br>
+<form method="post" th:action="'/send-message/'+ ${recipientId} + '/' + ${senderId}" th:object="${message}">
     <label th:for="subject">Subject:</label>
         <br>
     <input style="width: 500px;" type="text" name="subject" class="form-control" th:field="*{subject}"/>
@@ -22,6 +24,7 @@
         <br>
     <input type="submit"/>
 </form>
-
+</div>
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

@@ -2,24 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${messages} and ${messages.size()}">No messages.</p>
 
-<div>
-    <table th:each="message : ${messages}">
-        <h3 th:inline="text"><a th:href="'/sent-message/'+ ${message.id}"
-                                th:text="${message.subject}">
-        </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
-        <p th:text="${message.body}"></p>
-        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"></small> | </small>
-        <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+
+<div class="container">
+
+        <p th:unless="${messages} and ${messages.size()}">No messages.</p>
+        <table th:each="message : ${messages}">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                       <h3 class="card-title" th:inline="text"><a th:href="'/sent-message/'+ ${message.id}"
+                                                                        th:text="${message.subject}">
+                        </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
+                        <p class="card-text" th:text="${message.body}"></p>
+                        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/></small>
+                        <br>
+                        <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </table>
+
+
         <br>
-        <br>
-    </table>
+
 </div>
 
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

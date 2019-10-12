@@ -2,19 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <!--TODO include reply form-->
+<div class="container">
+    <br>
 <h3 th:inline ="text" th:text="${message.subject}"/>
 <p th:text="${message.body}"></p>
-<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${message.created}"/> </small>
-
-<br>
-
-</table>
+<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${message.created}"/></small>
+    <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+</div>
 
 
+
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

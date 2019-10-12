@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<div class="container">
 <p th:unless="${results} and ${results.size()}">No results.</p>
 
 <table th:each="result: ${results}">
@@ -17,9 +17,10 @@
     <p th:text="${result.body}"></p>
     <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created: <small th:text="${result.created}"/> | </small>
     <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments: <small th:text="${result.comments.size()}"/></small>
-
+</table>
     <br>
+</div>
 
-
+<div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

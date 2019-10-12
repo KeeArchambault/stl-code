@@ -35,7 +35,7 @@ public class HomeController extends AbstractController{
         return "home/cafe-directory";
     }
 
-    @RequestMapping(value="ed-resources", method= RequestMethod.GET)
+    @RequestMapping(value="resources", method= RequestMethod.GET)
     public String resourcesIndex(Model model) {
 
         model.addAttribute("title", "Resources");
