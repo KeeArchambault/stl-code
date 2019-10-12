@@ -14,14 +14,13 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-titile" th:inline="text"><a th:href="'/received-message/'+ ${message.id}"
+                            <h3 class="card-title" th:inline="text"><a th:href="'/received-message/'+ ${message.id}"
                                                     th:text="${message.subject}">
                             </a><small style="text-size: 5pt; color: gray" th:inline="text">  from <a th:href="'profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
                             <p class="card-text" th:text="${message.body}"></p>
-                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/></small>
-                            <br>
-                            <a th:href="'/send-message/'+ ${message.sender.id}">Reply | </a>
-                            <a th:href="'/delete-message/' + ${message.id}">Delete </a>
+                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/> | </small>
+                            <small th:inline="text"><a th:href="'/send-message/'+ ${message.sender.id}">Reply</a> | </small>
+                            <small th:inline="text"> <a th:href="'/delete-message/' + ${message.id}">Delete</a></small>
                         </div>
                     </div>
                 </div>

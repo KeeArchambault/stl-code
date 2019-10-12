@@ -17,7 +17,7 @@
 
     <br>
     <br>
-<h4 style="color: gray;" th:inline="text" >Comments (<small th:text="${post.comments.size()}"></small>)</h4>
+<h5 style="color: gray;" th:inline="text" >Comments (<small th:text="${post.comments.size()}"></small>)</h5>
 <form th:action="'/add-comment/' + ${post.id}" method="post" th:object="${comment}">
     <label th:for="commentBody">Add comment (500 characters max): </label>
     <textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>

@@ -136,7 +136,7 @@ public class PostController extends AbstractController{
 
                     post.addComment(comment);
                     postDao.save(post);
-                    return "redirect:/forum";
+                    return "redirect:/";
                 }
             }
         }

@@ -87,6 +87,14 @@ public class UserController extends AbstractController {
     @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model, @PathVariable int id) {
 
+        int currentUserId = getUserFromSession(request.getSession()).getId();
+
+        if(id == currentUserId){
+
+            return "redirect:/profile";
+        }
+
+
         User user = userDao.findById(id).get();
 
         List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
