@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment>{
 
     @Id
     @GeneratedValue
@@ -69,5 +69,13 @@ public class Comment {
 
     public Date getCreated() {
         return created;
+    }
+
+    @Override
+    public int compareTo(Comment comment) {
+        if (getCreated() == null || comment.getCreated() == null) {
+            return 0;
+        }
+        return getCreated().compareTo(comment.getCreated());
     }
 }

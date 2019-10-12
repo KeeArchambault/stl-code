@@ -38,6 +38,11 @@ public class PostController extends AbstractController{
 
         Post post = postDao.findById(id).get();
 
+        List<Comment> comments = new ArrayList<>(post.getComments());
+        Collections.sort(comments);
+        Collections.reverse(comments);
+
+        model.addAttribute("comments", comments);
         model.addAttribute("comment", comment);
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle());
