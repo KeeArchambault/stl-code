@@ -1,7 +1,6 @@
-package com.kee.stlcodecafe.models;
+package com.kee.stlcode.models;
 
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.kee.stlcodecafe.controllers;
+package com.kee.stlcode.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,12 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.kee.stlcodecafe.models.Comment;
-import com.kee.stlcodecafe.models.Post;
-import com.kee.stlcodecafe.models.User;
-import com.kee.stlcodecafe.models.data.CommentDao;
-import com.kee.stlcodecafe.models.data.PostDao;
-import com.kee.stlcodecafe.models.data.UserDao;
+import com.kee.stlcode.models.Comment;
+import com.kee.stlcode.models.Post;
+import com.kee.stlcode.models.User;
+import com.kee.stlcode.models.data.CommentDao;
+import com.kee.stlcode.models.data.PostDao;
+import com.kee.stlcode.models.data.UserDao;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
-package com.kee.stlcodecafe.controllers;
+package com.kee.stlcode.controllers;
 
-import com.kee.stlcodecafe.models.data.PostDao;
-import com.kee.stlcodecafe.models.data.UserDao;
+import com.kee.stlcode.models.data.PostDao;
+import com.kee.stlcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ public class HomeController extends AbstractController{
     @RequestMapping(value="home")
     public String index(Model model){
 
-        model.addAttribute("title", "Stl Code Cafe");
+        model.addAttribute("title", "Home");
 
         return "home/index";
     }

@@ -1,12 +1,12 @@
-package com.kee.stlcodecafe.controllers;
+package com.kee.stlcode.controllers;
 
 import javax.servlet.http.HttpSession;
 
 
-import com.kee.stlcodecafe.models.User;
-import com.kee.stlcodecafe.models.data.MessageDao;
-import com.kee.stlcodecafe.models.data.PostDao;
-import com.kee.stlcodecafe.models.data.UserDao;
+import com.kee.stlcode.models.User;
+import com.kee.stlcode.models.data.MessageDao;
+import com.kee.stlcode.models.data.PostDao;
+import com.kee.stlcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractController {

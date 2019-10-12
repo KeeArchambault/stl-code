@@ -1,4 +1,4 @@
-package com.kee.stlcodecafe.models;
+package com.kee.stlcode.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

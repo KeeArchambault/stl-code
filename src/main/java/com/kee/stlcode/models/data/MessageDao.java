@@ -1,8 +1,6 @@
-package com.kee.stlcodecafe.models.data;
+package com.kee.stlcode.models.data;
 
-
-
-import com.kee.stlcodecafe.models.User;
+import com.kee.stlcode.models.Message;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +8,5 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserDao extends CrudRepository<User, Integer> {
+public interface MessageDao extends CrudRepository<Message, Integer> {
 }

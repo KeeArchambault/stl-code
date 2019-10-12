@@ -1,8 +1,7 @@
-package com.kee.stlcodecafe.controllers;
+package com.kee.stlcode.controllers;
 
-import com.kee.stlcodecafe.models.Message;
-import com.kee.stlcodecafe.models.Post;
-import com.kee.stlcodecafe.models.User;
+import com.kee.stlcode.models.Message;
+import com.kee.stlcode.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller

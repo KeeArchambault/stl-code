@@ -1,6 +1,6 @@
-package com.kee.stlcodecafe.controllers;
+package com.kee.stlcode.controllers;
 
-import com.kee.stlcodecafe.models.Post;
+import com.kee.stlcode.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

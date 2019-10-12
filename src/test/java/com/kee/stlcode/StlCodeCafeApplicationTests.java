@@ -1,4 +1,4 @@
-package com.kee.stlcodecafe;
+package com.kee.stlcode;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

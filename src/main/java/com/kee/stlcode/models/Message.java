@@ -1,4 +1,4 @@
-package com.kee.stlcodecafe.models;
+package com.kee.stlcode.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Message {
