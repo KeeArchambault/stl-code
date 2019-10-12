@@ -111,8 +111,6 @@ public class PostController extends AbstractController{
     @RequestMapping(value="add-comment/{id}", method = RequestMethod.POST)
     public String addComment(HttpServletRequest request, Model model, @ModelAttribute @Valid Comment comment, Errors errors, @PathVariable int id) {
 
-//TODO fix comment functionality
-
         if (errors.hasErrors()) {
 
             return "redirect:";
@@ -136,7 +134,7 @@ public class PostController extends AbstractController{
 
                     post.addComment(comment);
                     postDao.save(post);
-                    return "redirect:/";
+                    return "redirect:/post/" + id;
                 }
             }
         }

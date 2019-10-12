@@ -9,8 +9,8 @@
 
 <div class="container" th:object="${user}">
         <br>
-    <p>profile pic here</p>
-
+    <img src="https://ih1.redbubble.net/image.504431150.0515/flat,550x550,075,f.u1.jpg" height="200px">
+        <br>
     <a th:href="'/send-message/' + ${user.id}" th:text="'Message ' + ${user.name}"></a>
         <br>
         <br>

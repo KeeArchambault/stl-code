@@ -122,6 +122,7 @@ public class MessageController extends AbstractController {
 
         Message message = messageDao.findById(id).get();
 
+        model.addAttribute("title", message.getSubject());
         model.addAttribute("message", message);
 
         return "message/sent-message";
