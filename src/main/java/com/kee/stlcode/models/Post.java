@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Post {
+public class Post implements Comparable<Post>{
 
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class Post {
 
     @NotNull
     @Lob
-    @Size(min = 1, max =1500, message = "Post too long.")
+    @Size(min = 1, max =1500, message = "Post length must be between 1 and 1500 characters.")
     private String body;
 
     @ManyToOne
@@ -31,7 +31,6 @@ public class Post {
     @OneToMany
     private List<Comment> comments;
 
-    @DateTimeFormat()
     private Date created;
 
     @PrePersist
@@ -84,6 +83,14 @@ public class Post {
 
     public void addComment(Comment comment){
         this.comments.add(comment);
+    }
+
+    @Override
+    public int compareTo(Post post) {
+        if (getCreated() == null || post.getCreated() == null) {
+            return 0;
+        }
+        return getCreated().compareTo(post.getCreated());
     }
 }
 

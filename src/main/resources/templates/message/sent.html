@@ -6,30 +6,29 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 
-
+<br>
 <div class="container">
-
-        <p th:unless="${messages} and ${messages.size()}">No messages.</p>
+    <p th:unless="${messages} and ${messages.size()}">No messages.</p>
         <table th:each="message : ${messages}">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                       <h3 class="card-title" th:inline="text"><a th:href="'/sent-message/'+ ${message.id}"
-                                                                        th:text="${message.subject}">
-                        </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
-                        <p class="card-text" th:text="${message.body}"></p>
-                        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/></small>
-                        <br>
-                        <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                           <h3 class="card-title" th:inline="text"><a th:href="'/sent-message/'+ ${message.id}"
+                                                                            th:text="${message.subject}">
+                            </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
+                            <p class="card-text" th:text="${message.body}"></p>
+                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/></small>
+                            <br>
+                            <a th:href="'/delete-message/' + ${message.id}">Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <br>
         </table>
 
 
-        <br>
 
 </div>
 

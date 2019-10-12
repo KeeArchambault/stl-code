@@ -11,7 +11,7 @@
     <a th:href="'/send-message/' + ${user.id}" th:text="'Message ' + ${user.name}"></a>
     <br>
     <br>
-    <table th:each="post : *{posts}">
+    <table th:each="post : ${posts}">
 
         <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}" th:text="${post.title}"/></h3>
         <p th:text="${post.body}"></p>

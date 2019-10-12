@@ -1,5 +1,6 @@
 package com.kee.stlcode.controllers;
 
+import com.kee.stlcode.models.Post;
 import com.kee.stlcode.models.User;
 import com.kee.stlcode.models.data.PostDao;
 import com.kee.stlcode.models.data.UserDao;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 @Controller
@@ -66,7 +71,12 @@ public class UserController extends AbstractController {
 
             User user = getUserFromSession(request.getSession());
 
-            model.addAttribute("posts", user.getPosts());
+            List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
+
+            Collections.sort(posts);
+            Collections.reverse(posts);
+
+            model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             model.addAttribute("title", "Posts by Me");
             return "user/profile";
@@ -79,6 +89,12 @@ public class UserController extends AbstractController {
 
         User user = userDao.findById(id).get();
 
+        List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
+
+        Collections.sort(posts);
+        Collections.reverse(posts);
+
+        model.addAttribute("posts", posts);
         model.addAttribute("user", user);
         model.addAttribute("title", user.getName());
         return "user/other-user-profile";

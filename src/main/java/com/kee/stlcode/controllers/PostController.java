@@ -46,7 +46,11 @@ public class PostController extends AbstractController{
     }
 
     @RequestMapping(value = "new-post", method = RequestMethod.GET)
-    public String newPost(Model model, Post post) {
+    public String newPost(HttpServletRequest request, Model model, Post post) {
+
+        if(getUserFromSession(request.getSession()) == null) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("title", "Create a New Post");
 
@@ -56,7 +60,6 @@ public class PostController extends AbstractController{
 
     @RequestMapping(value = "new-post", method = RequestMethod.POST)
     public String processNewPost(HttpServletRequest request, Model model, @ModelAttribute @Valid Post post, Errors errors) {
-
 
         model.addAttribute("title", "Create a New Post");
 
@@ -84,10 +87,11 @@ public class PostController extends AbstractController{
         if(getUserFromSession(request.getSession()) == null) {
             return "redirect:/login";
         }
-
-        // places all posts in a list and then reverses the list so that they are displayed from oldest to newest
         List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) postDao.findAll());
+
+        Collections.sort(posts);
         Collections.reverse(posts);
+
 
         model.addAttribute("posts", posts);
         return "post/forum";
