@@ -15,7 +15,7 @@ public class Comment {
     private int id;
 
     @NotNull
-    @Size(min = 1, max = 500, message = "Comment too long.")
+    @Size(min = 1, max = 1500, message = "Comment too long.")
     private String commentBody;
 
     @ManyToOne

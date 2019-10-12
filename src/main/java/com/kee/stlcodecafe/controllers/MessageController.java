@@ -128,7 +128,13 @@ public class MessageController extends AbstractController {
         return "message/sent-message";
     }
 
-//    TODO add route to display sent messages
+    @RequestMapping(value="delete-message/{id}")
+    public String remove(Model model, @PathVariable int id){
+
+        messageDao.deleteById(id);
+
+        return "redirect:/inbox";
+    }
 
 
 }

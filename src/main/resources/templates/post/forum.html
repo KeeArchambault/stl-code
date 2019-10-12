@@ -14,16 +14,15 @@
        th:text="${post.title}">
     </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'profile/' + ${post.user.id}" th:text="${post.user.name}"/></small></h3>
 
-
     <p th:text="${post.body}"></p>
     <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> | </small>
     <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments (<small th:text="${post.comments.size()}"/>) </small>
-
     <br>
-
-
+    <br>
 </table>
 </div>
+
+
 <div th:replace="fragments :: js-footer"></div>
 </body>
 </html>

@@ -22,12 +22,12 @@ public class Message {
     private User sender;
 
     @NotNull
-    @Size(min=1, max=15)
+    @Size(min=1, max=50)
     private String subject;
 
     @Lob
     @NotNull
-    @Size(min=1, max = 500)
+    @Size(min=1, max = 1500)
     private String body;
 
     @DateTimeFormat()

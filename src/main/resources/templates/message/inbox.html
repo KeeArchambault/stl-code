@@ -7,7 +7,7 @@
 
 
     <div class="container">
-
+        <br>
         <p th:unless="${messages} and ${messages.size()}">No messages.</p>
         <table th:each="message : ${messages}">
             <div class="row">
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div>
+            <br>
         </table>
 
 

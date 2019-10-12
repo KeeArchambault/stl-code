@@ -18,12 +18,12 @@ public class Post {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 15)
+    @Size(min = 3, max = 50)
     private String title;
 
     @NotNull
     @Lob
-    @Size(min = 1, max =500, message = "Post too long.")
+    @Size(min = 1, max =1500, message = "Post too long.")
     private String body;
 
     @ManyToOne
