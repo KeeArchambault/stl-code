@@ -7,8 +7,10 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
-        <br>
-
+    <br>
+    <img th:inline="text" src="https://ih1.redbubble.net/image.504431150.0515/flat,550x550,075,f.u1.jpg" height="200px"/>
+    <br>
+    <br>
     <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
     <table th:each="post : ${posts}">
@@ -27,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <br>
+    <br>
     </table>
 
 
