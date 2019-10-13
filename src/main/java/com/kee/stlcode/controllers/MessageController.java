@@ -46,7 +46,7 @@ public class MessageController extends AbstractController {
 //        sender.addToSentMessages(message);
 //        userDao.save(sender);
 
-        return "redirect:/profile/" + recipientId;
+        return "redirect:/sent";
 
     }
 

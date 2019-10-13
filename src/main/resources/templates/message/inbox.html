@@ -18,9 +18,10 @@
                                                     th:text="${message.subject}">
                             </a><small style="text-size: 5pt; color: gray" th:inline="text">  from <a th:href="'profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
                             <p class="card-text" th:text="${message.body}"></p>
-                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/> | </small>
-                            <small th:inline="text"><a th:href="'/send-message/'+ ${message.sender.id}">Reply</a> | </small>
-                            <small th:inline="text"> <a th:href="'/delete-message/' + ${message.id}">Delete</a></small>
+                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/> </small>
+                            <br>
+                           <a th:inline="text"><a th:href="'/send-message/'+ ${message.sender.id}">Reply</a> | <a th:href="'/delete-message/' + ${message.id}">Delete</a></a>
+
                         </div>
                     </div>
                 </div>

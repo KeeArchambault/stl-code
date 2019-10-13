@@ -27,8 +27,12 @@ public class SearchController extends AbstractController{
     }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String searchResults(Model model, @RequestParam String searchTerm){
+    public String searchResults(HttpServletRequest request, Model model, @RequestParam String searchTerm){
 
+        if(getUserFromSession(request.getSession()) == null) {
+
+            return "redirect:/login";
+        }
         model.addAttribute("title", "Search Results");
 
         List<Post> results = new ArrayList<Post>();
