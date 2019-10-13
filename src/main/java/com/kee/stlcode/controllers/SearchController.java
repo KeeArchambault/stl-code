@@ -1,6 +1,7 @@
 package com.kee.stlcode.controllers;
 
 import com.kee.stlcode.models.Post;
+import com.kee.stlcode.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,15 +36,23 @@ public class SearchController extends AbstractController{
         }
         model.addAttribute("title", "Search Results");
 
-        List<Post> results = new ArrayList<Post>();
+        List<Post> postResults = new ArrayList<Post>();
 
         for (Post post : postDao.findAll()){
-            if (post.getTitle().toLowerCase().contains(searchTerm.toLowerCase()) || post.getBody().toLowerCase().contains(searchTerm.toLowerCase())){
-                results.add(post);
+            if (post.getTitle().toLowerCase().contains(searchTerm.toLowerCase())
+                    || post.getBody().toLowerCase().contains(searchTerm.toLowerCase())){
+                postResults.add(post);
             }
         }
 
-        model.addAttribute("results", results);
+        List<User> userResults = new ArrayList<User>();
+        for (User user : userDao.findAll()){
+            if(user.getName().toLowerCase().equals(searchTerm.toLowerCase())){
+                userResults.add(user);
+            }
+        }
+        model.addAttribute("userResults", userResults);
+        model.addAttribute("postResults", postResults);
         return "search/search-results";
     }
 
