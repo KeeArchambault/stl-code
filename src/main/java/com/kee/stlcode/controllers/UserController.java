@@ -5,6 +5,7 @@ import com.kee.stlcode.models.User;
 import com.kee.stlcode.models.data.PostDao;
 import com.kee.stlcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -61,7 +63,7 @@ public class UserController extends AbstractController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "profile", method = RequestMethod.GET)
+    @RequestMapping(value = "profile", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
     public String profile(HttpServletRequest request, Model model) {
 
         if(getUserFromSession(request.getSession()) == null){
@@ -76,6 +78,10 @@ public class UserController extends AbstractController {
             Collections.sort(posts);
             Collections.reverse(posts);
 
+            File profilePic = user.getProfilePic();
+            String filePath = profilePic.getPath();
+
+           model.addAttribute("profilePic", filePath);
             model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             model.addAttribute("title", "Posts by Me");
