@@ -34,23 +34,21 @@ public class MessageController extends AbstractController {
         User recipient = userDao.findById(recipientId).get();
         User sender = userDao.findById(senderId).get();
 
-        message.setRecipient(recipient);
-        message.setSender(sender);
-        messageDao.save(message);
+        Message m1 = message;
+        Message m2 = message;
 
-//        message.setSender_recipient(sender, recipient);
-//
-//        recipient.addToReceivedMessages(message);
-//        userDao.save(recipient);
-//
-//        sender.addToSentMessages(message);
-//        userDao.save(sender);
+        m1.setRecipient(recipient);
+        m1.setSender(sender);
+
+        m2.setRecipient(recipient);
+        m2.setSender(sender);
+
+        messageDao.save(m1);
+        messageDao.save(m2);
 
         return "redirect:/sent";
 
     }
-
-//    TODO add route display received messages
 
     @RequestMapping("inbox")
     public String inbox(HttpServletRequest request, Model model){
@@ -104,6 +102,8 @@ public class MessageController extends AbstractController {
         model.addAttribute("messages", messages);
 
         return "message/sent";
+
+//        TODO if sent message deleted, redirect back to sent messages
     }
 
     @RequestMapping(value="received-message/{id}")
@@ -129,11 +129,13 @@ public class MessageController extends AbstractController {
     }
 
     @RequestMapping(value="delete-message/{id}")
-    public String remove(Model model, @PathVariable int id){
+    public String remove(HttpServletRequest request, Model model, @PathVariable int id){
 
         messageDao.deleteById(id);
 
-        return "redirect:/inbox";
+
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
 
