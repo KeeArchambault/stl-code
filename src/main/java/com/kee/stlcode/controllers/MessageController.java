@@ -34,20 +34,14 @@ public class MessageController extends AbstractController {
         User recipient = userDao.findById(recipientId).get();
         User sender = userDao.findById(senderId).get();
 
-        Message m1 = message;
-        Message m2 = message;
+        message.setRecipient(recipient);
+        message.setSender(sender);
 
-        m1.setRecipient(recipient);
-        m1.setSender(sender);
-
-        m2.setRecipient(recipient);
-        m2.setSender(sender);
-
-        messageDao.save(m1);
-        messageDao.save(m2);
+        messageDao.save(message);
 
         return "redirect:/sent";
 
+//Todo fix so that sender can't delete recipient's received messages
     }
 
     @RequestMapping("inbox")

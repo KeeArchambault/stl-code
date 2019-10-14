@@ -46,8 +46,8 @@ public class UserController extends AbstractController {
             if (user.getName().equals(username) && user.getPassword().equals(password)) {
                 setUserInSession(request.getSession(), user);
                 model.addAttribute("user", user);
-                String referer = request.getHeader("Referer");
-                return "redirect:"+ referer;
+
+                return "redirect:/profile";
             }
         }
         model.addAttribute("errors", "Invalid login credentials.");
