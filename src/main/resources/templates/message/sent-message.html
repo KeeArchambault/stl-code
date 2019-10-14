@@ -7,9 +7,8 @@
 
 <div class="container">
     <br>
-
-<p th:text="${message.body}"></p>
-<small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${message.created}"/> | </small>
+    <p th:text="${message.body}"></p>
+    <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${message.created}"/> | </small>
     <small th:inline="text"> <a th:href="'/delete-message/' + ${message.id}">Delete</a> </small>
 </div>
 

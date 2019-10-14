@@ -6,16 +6,15 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
-<br>
-<p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
+    <br>
+    <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
 
     <table th:each="post : ${posts}">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}"
-                                                th:text="${post.title}">
+                        <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}" th:text="${post.title}">
                         </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'profile/' + ${post.user.id}" th:text="${post.user.name}"/></small></h3>
                         <p class="card-text" th:text="${post.body}"></p>
                         <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> | </small>
@@ -24,16 +23,9 @@
                 </div>
             </div>
         </div>
-        <br>
+    <br>
     </table>
-
-
-
-
-
-
 </div>
-
 
 <div th:replace="fragments :: js-footer"></div>
 </body>

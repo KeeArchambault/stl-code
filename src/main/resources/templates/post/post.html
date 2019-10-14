@@ -5,36 +5,30 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-
-
 <br>
 <div class="container">
     <h4 style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'../profile/' + ${post.user.id}" th:text="${post.user.name}"/></h4>
 <br>
 <p th:text="${post.body}"></p>
 <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> </small>
-
-
     <br>
     <br>
-<h5 style="color: gray;" th:inline="text" >Comments (<small th:text="${post.comments.size()}"></small>)</h5>
-<form th:action="'/add-comment/' + ${post.id}" method="post" th:object="${comment}">
-    <label th:for="commentBody">Add comment (500 characters max): </label>
-    <textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
-    <span th:errors="*{commentBody}" class="error"></span>
-    <input name="id" type="hidden" th:value="${post.id}"/>
-        <br>
-    <input type="submit">
-</form>
-<br>
+    <h5 style="color: gray;" th:inline="text" >Comments (<small th:text="${post.comments.size()}"></small>)</h5>
+    <form th:action="'/add-comment/' + ${post.id}" method="post" th:object="${comment}">
+        <label th:for="commentBody">Add comment (500 characters max): </label>
+        <textarea style="width: 500px;" name="commentBody" class="form-control" th:field="*{commentBody}"></textarea>
+        <span th:errors="*{commentBody}" class="error"></span>
+        <input name="id" type="hidden" th:value="${post.id}"/>
+            <br>
+        <input type="submit">
+    </form>
+    <br>
     <table th:each="postComment : ${comments}">
         <p th:text="${postComment.commentBody}"></p>
         <small  style="text-size: 5pt; color: gray" name="create" th:inline="text">Created <small th:text="${postComment.created}"/> | </small>
         <small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'../profile/' + ${post.user.id}" th:text="${post.user.name}"/></small>
         <br>
         <br>
-
-
     </table>
 </div>
 
