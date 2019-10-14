@@ -110,13 +110,23 @@ public class UserController extends AbstractController {
             return "redirect:/profile";
         }
 
-
         User user = userDao.findById(id).get();
 
         List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
 
         Collections.sort(posts);
         Collections.reverse(posts);
+
+        File profilePic = user.getProfilePic();
+
+        if(profilePic == null){
+            String fileName = "default.png";
+            model.addAttribute("profilePic", fileName);
+        }else {
+            Path filePath = Paths.get(profilePic.getPath());
+            String fileName = profilePic.getName();
+            model.addAttribute("profilePic", fileName);
+        }
 
         model.addAttribute("posts", posts);
         model.addAttribute("user", user);

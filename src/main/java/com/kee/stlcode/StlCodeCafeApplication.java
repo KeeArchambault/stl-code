@@ -1,8 +1,5 @@
 package com.kee.stlcode;
 
-
-
-import com.kee.stlcode.controllers.SearchController;
 import com.kee.stlcode.controllers.UploadController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
