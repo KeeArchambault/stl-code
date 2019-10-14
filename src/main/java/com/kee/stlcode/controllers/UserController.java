@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -79,9 +81,12 @@ public class UserController extends AbstractController {
             Collections.reverse(posts);
 
             File profilePic = user.getProfilePic();
-            String filePath = profilePic.getPath();
 
-           model.addAttribute("profilePic", filePath);
+            Path filePath = Paths.get(profilePic.getPath());
+
+            String fileName = profilePic.getName();
+
+            model.addAttribute("profilePic", fileName);
             model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             model.addAttribute("title", "Posts by Me");
