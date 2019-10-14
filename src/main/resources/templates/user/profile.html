@@ -2,10 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+<!--<h1 th:text="'Posts by ' + ${user.name}"></h1>-->
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
+    <br>
+    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
+    <br>
+    <br>
+    <form th:action="'/upload/' + ${user.id}">
+    <button type="submit"> Upload a Photo</button>
+    </form>
     <br>
     <br>
     <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
@@ -28,7 +36,9 @@
         </div>
     <br>
     </table>
-</div>
+
+
+
 
 <div th:replace="fragments :: js-footer"></div>
 </body>

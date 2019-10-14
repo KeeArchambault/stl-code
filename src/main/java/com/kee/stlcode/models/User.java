@@ -1,13 +1,24 @@
 package com.kee.stlcode.models;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 
 
 
 
+import org.springframework.web.multipart.MultipartFile;
+import sun.awt.image.InputStreamImageSource;
+
+import javax.annotation.Resource;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Entity
@@ -35,6 +46,8 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+    private File profilePic;
+
     @OneToMany
     private List<Comment> comments;
 
@@ -42,6 +55,35 @@ public class User {
     }
 
     public User(String name) {
+    }
+
+    public File getProfilePic() {
+        return profilePic;
+    }
+
+    public void write(MultipartFile file, Path dir) {
+    }
+
+    public void setProfilePic(MultipartFile profilePic, Path dir) throws IOException {
+
+        Path filepath = Paths.get(dir.toString());
+        profilePic.transferTo(filepath);
+
+        this.profilePic = filepath.toFile();
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
+    }
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -53,13 +95,6 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
@@ -74,13 +109,6 @@ public class User {
     }
     public void setVerify(String verify) {
         this.verify = verify;
-    }
-
-    public void addPost(Post post) {
-        posts.add(post);
-    }
-    public List<Post> getPosts() {
-        return posts;
     }
 
     public List<Comment> getComments() {

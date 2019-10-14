@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+<br>
+<div class="container">
+    <form action="/profile">
+        <div th:if="${message}">
+            <h5 th:text="${message}"/>
+            <button type="submit">Back</button>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments :: js-footer"></div>
+</body>
+</html>
