@@ -8,7 +8,7 @@
 
 <div class="container">
     <br>
-    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" height="200px"/>
+    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
     <br>
     <br>
     <form th:action="'/upload/' + ${user.id}">

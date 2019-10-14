@@ -82,15 +82,19 @@ public class UserController extends AbstractController {
 
             File profilePic = user.getProfilePic();
 
-            Path filePath = Paths.get(profilePic.getPath());
+            if(profilePic == null){
+                String fileName = "default.png";
+                model.addAttribute("profilePic", fileName);
+            }else {
+                Path filePath = Paths.get(profilePic.getPath());
+                String fileName = profilePic.getName();
+                model.addAttribute("profilePic", fileName);
+            }
+                model.addAttribute("posts", posts);
+                model.addAttribute("user", user);
+                model.addAttribute("title", "Posts by Me");
+                return "user/profile";
 
-            String fileName = profilePic.getName();
-
-            model.addAttribute("profilePic", fileName);
-            model.addAttribute("posts", posts);
-            model.addAttribute("user", user);
-            model.addAttribute("title", "Posts by Me");
-            return "user/profile";
         }
 
     }

@@ -8,7 +8,7 @@
 <!--TODO use a cards-->
 <div class="container" th:object="${user}">
     <br>
-    <img src="https://ih1.redbubble.net/image.504431150.0515/flat,550x550,075,f.u1.jpg" height="200px"/>
+    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
     <br>
     <br>
     <button><a th:href="'/send-message/' + ${user.id}" th:text="'Message ' + ${user.name}"></a></button>
