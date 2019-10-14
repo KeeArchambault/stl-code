@@ -5,29 +5,29 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-
-    <div class="container">
+<div class="container">
         <br>
-        <p th:unless="${messages} and ${messages.size()}">No messages.</p>
-        <table th:each="message : ${messages}">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title" th:inline="text"><a th:href="'/received-message/'+ ${message.id}"
-                                                    th:text="${message.subject}">
-                            </a><small style="text-size: 5pt; color: gray" th:inline="text">  from <a th:href="'profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
-                            <p class="card-text" th:text="${message.body}"></p>
-                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/> </small>
-                            <br>
-                           <a th:inline="text"><a th:href="'/send-message/'+ ${message.sender.id}">Reply</a> | <a th:href="'/delete-message/' + ${message.id}">Delete</a></a>
+    <p th:unless="${messages} and ${messages.size()}">No messages.</p>
 
-                        </div>
+    <table th:each="message : ${messages}">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title" th:inline="text"><a th:href="'/received-message/'+ ${message.id}"
+                                                th:text="${message.subject}">
+                        </a><small style="text-size: 5pt; color: gray" th:inline="text">  from <a th:href="'profile/' + ${message.sender.id}" th:text="${message.sender.name}"/></small></h3>
+                        <p class="card-text" th:text="${message.body}"></p>
+                        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/> </small>
+                        <br>
+                       <a th:inline="text"><a th:href="'/send-message/'+ ${message.sender.id}">Reply</a> | <a th:href="'/delete-message/' + ${message.id}">Delete</a></a>
+
                     </div>
                 </div>
             </div>
-            <br>
-        </table>
+        </div>
+    <br>
+    </table>
 
 
 

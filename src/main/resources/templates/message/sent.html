@@ -5,10 +5,10 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-
-<br>
+    <br>
 <div class="container">
     <p th:unless="${messages} and ${messages.size()}">No messages.</p>
+
         <table th:each="message : ${messages}">
             <div class="row">
                 <div class="col">
@@ -25,11 +25,8 @@
                     </div>
                 </div>
             </div>
-            <br>
+        <br>
         </table>
-
-
-
 </div>
 
 <div th:replace="fragments :: js-footer"></div>

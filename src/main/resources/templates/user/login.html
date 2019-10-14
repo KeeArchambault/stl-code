@@ -3,35 +3,32 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
-
 <nav th:replace="fragments :: navigation"></nav>
 
 <br>
 <div class="container">
-<form method="post">
-    <div class="form-group">
-        <label th:for="username">Username:
-            <input class="form-control" type="text" name="username"/>
-        </label>
-    </div>
+    <form method="post">
+        <div class="form-group">
+            <label th:for="username">Username:
+                <input class="form-control" type="text" name="username"/>
+            </label>
+        </div>
 
-    <div class="form-group">
-        <label th:for="password">Password:
-            <input class="form-control" type="password" name="password"/>
+        <div class="form-group">
+            <label th:for="password">Password:
+                <input class="form-control" type="password" name="password"/>
+            </label>
+                <br>
+            <span style="color: red;" th:text="${errors}"></span>
+        </div>
 
-        </label>
+        <input type="submit">
 
-        <br>
-        <span style="color: red;" th:text="${errors}"></span>
-    </div>
-
-    <input type="submit">
-
-</form>
-
-<br>
-<a href="/sign-up">Don't have an account yet? Sign Up.</a>
+    </form>
+    <br>
+    <a href="/sign-up">Don't have an account yet? Sign Up.</a>
 </div>
+
 <div th:replace="fragments :: js-footer"></div>
 </body>
 </html>
