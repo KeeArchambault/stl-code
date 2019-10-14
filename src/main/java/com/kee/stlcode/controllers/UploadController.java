@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @RequestMapping(value="")
 public class UploadController extends AbstractController {
 
-    public static String uploadDirectory = System.getProperty("user.dir") + "/uploads/";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/";
     //Save the uploaded file to this folder
 
         @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)

@@ -8,10 +8,12 @@
 
 <div class="container">
     <br>
-    <img th:src="${profilePic}" th:alt="${profilePic}" height="200px"/>
+    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" height="200px"/>
     <br>
     <br>
-    <button><a th:href="'/upload/' + ${user.id}">Upload a Photo</a></button>
+    <form th:action="'/upload/' + ${user.id}">
+    <button type="submit"> Upload a Photo</button>
+    </form>
     <br>
     <br>
     <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
