@@ -45,9 +45,6 @@ public class Post implements Comparable<Post>{
         this.title = title;
         this.body = body;
     }
-    public Date getCreated() {
-        return created;
-    }
 
     public int getId() {
         return id;
@@ -56,7 +53,6 @@ public class Post implements Comparable<Post>{
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -64,7 +60,6 @@ public class Post implements Comparable<Post>{
     public String getBody() {
         return body;
     }
-
     public void setBody(String body) {
         this.body = body;
     }
@@ -72,7 +67,6 @@ public class Post implements Comparable<Post>{
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -80,9 +74,12 @@ public class Post implements Comparable<Post>{
     public List<Comment> getComments() {
         return comments;
     }
-
     public void addComment(Comment comment){
         this.comments.add(comment);
+    }
+
+    public Date getCreated() {
+        return created;
     }
 
     @Override

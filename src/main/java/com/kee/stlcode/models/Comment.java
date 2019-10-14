@@ -44,25 +44,23 @@ public class Comment implements Comparable<Comment>{
         return id;
     }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
     public String getCommentBody() {
         return commentBody;
     }
-
     public void setCommentBody(String commentBody) {
         this.commentBody = commentBody;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
