@@ -102,8 +102,6 @@ public class MessageController extends AbstractController {
         model.addAttribute("messages", messages);
 
         return "message/sent";
-
-//        TODO if sent message deleted, redirect back to sent messages
     }
 
     @RequestMapping(value="received-message/{id}")
