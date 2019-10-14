@@ -62,7 +62,6 @@ public class User {
     }
 
     public void write(MultipartFile file, Path dir) {
-
     }
 
     public void setProfilePic(MultipartFile profilePic, Path dir) throws IOException {
@@ -71,24 +70,20 @@ public class User {
         profilePic.transferTo(filepath);
 
         this.profilePic = filepath.toFile();
-
     }
-
 
     public void addPost(Post post) {
         posts.add(post);
+    }
+    public List<Post> getPosts() {
+        return posts;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
     }
 
     public int getId() {
@@ -98,7 +93,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -106,7 +100,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -114,16 +107,13 @@ public class User {
     public String getVerify() {
         return verify;
     }
-
     public void setVerify(String verify) {
         this.verify = verify;
     }
 
-
     public List<Comment> getComments() {
         return comments;
     }
-
     public void addComment(Comment comment) {
         this.comments.add(comment);
     }
