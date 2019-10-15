@@ -8,8 +8,9 @@
 <div class="container">
     <form action="/profile">
         <div th:if="${message}">
-            <h5 th:text="${message}"/>
-            <button type="submit">Back</button>
+            <p th:text="${message}"/>
+            <br>
+            <button type="submit">Back to Profile</button>
         </div>
     </form>
 </div>

@@ -53,7 +53,7 @@ public class UploadController extends AbstractController {
             e.printStackTrace();
         }
 
-            model.addAttribute("message", "Successfully uploaded Photo");
+            model.addAttribute("message", "Successfully Uploaded Photo.");
             return "upload/upload-status.html";
         }
 

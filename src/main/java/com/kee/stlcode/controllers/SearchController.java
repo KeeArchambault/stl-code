@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,12 +52,21 @@ public class SearchController extends AbstractController{
         for (User user : userDao.findAll()){
             if(user.getName().toLowerCase().equals(searchTerm.toLowerCase())){
                 userResults.add(user);
+                File profilePic = user.getProfilePic();
+
+                if(profilePic == null){
+                    String fileName = "default.png";
+                    model.addAttribute("profilePic", fileName);
+                }else {
+                    Path filePath = Paths.get(profilePic.getPath());
+                    String fileName = profilePic.getName();
+                    model.addAttribute("profilePic", fileName);
+                }
             }
         }
         model.addAttribute("userResults", userResults);
         model.addAttribute("postResults", postResults);
         return "search/search-results";
     }
-
 
 }
