@@ -18,7 +18,7 @@
                                                                             th:text="${message.subject}">
                             </a><small style="text-size: 5pt; color: gray" th:inline="text"> to <a th:href="'profile/' + ${message.recipient.id}" th:text="${message.recipient.name}"/></small></h3>
                             <p class="card-text" th:text="${message.body}"></p>
-                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent: <small th:text="${message.created}"/></small>
+                            <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent <small th:text="${message.created}"/></small>
                             <br>
                             <a th:href="'/delete-message/' + ${message.id}">Delete</a>
                         </div>

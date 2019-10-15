@@ -6,14 +6,15 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container" th:object="${user}">
-    <br>
-    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
-    <br>
-    <br>
-
-    <form th:action="'/send-message/' + ${user.id}">
-        <button type="submit" th:text="'Message ' + ${user.name}"> </button>
-    </form>
+        <br>
+    <div class="text-center">
+        <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
+            <br>
+            <br>
+        <form th:action="'/send-message/' + ${user.id}">
+            <button type="submit" th:text="'Message ' + ${user.name}"> </button>
+        </form>
+    </div>
     <br>
     <br>
     <table th:each="post : ${posts}">
@@ -24,8 +25,8 @@
                         <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}"
                                                 th:text="${post.title}"></a></h3>
                         <p class="card-text" th:text="${post.body}"></p>
-                        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> | </small>
-                        <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments (<small th:text="${post.comments.size()}"/>) </small>
+                        <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"></small> | </small>
+                        <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments (<small th:text="${post.comments.size()}"></small>) </small>
 
                     </div>
                 </div>

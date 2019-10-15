@@ -8,16 +8,17 @@
 
 <div class="container">
     <br>
-    <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
-    <br>
-    <br>
-    <form th:action="'/upload/' + ${user.id}">
-    <button type="submit"> Upload a Photo</button>
-    </form>
-    <br>
-    <br>
-    <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
-
+    <div class="text-center">
+        <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
+        <br>
+        <br>
+        <form th:action="'/upload/' + ${user.id}">
+        <button type="submit"> Upload a Photo</button>
+        </form>
+        <br>
+        <br>
+        <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
+    </div>
     <table th:each="post : ${posts}">
         <div class="row">
             <div class="col">
