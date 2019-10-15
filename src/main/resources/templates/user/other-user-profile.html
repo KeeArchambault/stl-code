@@ -10,7 +10,10 @@
     <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
     <br>
     <br>
-    <button><a th:href="'/send-message/' + ${user.id}" th:text="'Message ' + ${user.name}"></a></button>
+
+    <form th:action="'/send-message/' + ${user.id}">
+        <button type="submit" th:text="'Message ' + ${user.name}"> </button>
+    </form>
     <br>
     <br>
     <table th:each="post : ${posts}">
