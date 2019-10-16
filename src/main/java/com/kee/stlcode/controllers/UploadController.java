@@ -21,26 +21,27 @@ import java.nio.file.Paths;
 @RequestMapping(value="")
 public class UploadController extends AbstractController {
 
+    //gets the root of the project and appends a subdirectory to it
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/";
-    //Save the uploaded file to this folder
+    //save the uploaded file to this folder
 
         @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)
-        public String upload(Model model, @PathVariable int id) {
+        public String fileUpload(Model model, @PathVariable int id) {
 
             model.addAttribute("title", "Upload a Photo");
             model.addAttribute("id", id);
             return "upload/upload";
         }
-    @RequestMapping(value="/upload/{id}") // //new annotation since 4.3
-    public String singleFileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) {
+    @RequestMapping(value="/upload/{id}")
+    public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) {
 
         if (file.isEmpty()) {
-
-            return "redirect:uploadStatus";
+            model.addAttribute("message", "Please choose a valid file");
+            return "redirect:upload/upload-status";
         }
 
         try {
-            // Get the file and save it somewhere
+            // Get the file and save it uploadDirectory
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadDirectory +  file.getOriginalFilename());
             Files.write(path, bytes);
