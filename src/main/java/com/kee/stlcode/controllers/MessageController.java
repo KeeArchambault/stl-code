@@ -40,8 +40,6 @@ public class MessageController extends AbstractController {
         messageDao.save(message);
 
         return "redirect:/sent";
-
-//Todo fix so that sender can't delete recipient's received messages
     }
 
     @RequestMapping("inbox")
@@ -60,8 +58,12 @@ public class MessageController extends AbstractController {
 
         for(Message message : messageDao.findAll()){
             if(userId == message.getRecipient().getId()) {
-                messages.add(message);
+                if(!message.isRecipientDeleted()) {
+
+                    messages.add(message);
+                }
             }
+
         }
 
         Collections.reverse(messages);
@@ -88,7 +90,9 @@ public class MessageController extends AbstractController {
 
         for(Message message : messageDao.findAll()) {
             if (userId == message.getSender().getId()) {
-                messages.add(message);
+                if(!message.isSenderDeleted()) {
+                    messages.add(message);
+                }
             }
         }
         Collections.reverse(messages);
@@ -123,7 +127,18 @@ public class MessageController extends AbstractController {
     @RequestMapping(value="delete-message/{id}")
     public String remove(HttpServletRequest request, Model model, @PathVariable int id){
 
-        messageDao.deleteById(id);
+        Message message = messageDao.findById(id).get();
+        User currentUser = getUserFromSession(request.getSession());
+
+        if(currentUser == message.getRecipient()) {
+            message.setRecipientDeleted(true);
+            messageDao.save(message);
+        }
+
+        if(currentUser == message.getSender()) {
+            message.setSenderDeleted(true);
+            messageDao.save(message);
+        }
 
 
         String referer = request.getHeader("Referer");
