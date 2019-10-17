@@ -2,7 +2,6 @@ package com.kee.stlcode.controllers;
 
 
 import com.kee.stlcode.models.User;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,8 +41,14 @@ public class UploadController extends AbstractController {
 
         try {
             // Get the file and save it uploadDirectory
+
+            //gets data from image and saves in a byte array
             byte[] bytes = file.getBytes();
+
+            //creates a path where we can store the file
             Path path = Paths.get(uploadDirectory +  file.getOriginalFilename());
+
+            //need the path to already exist
             Files.write(path, bytes);
 
             User user = userDao.findById(id).get();
