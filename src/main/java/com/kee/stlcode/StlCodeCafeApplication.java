@@ -8,11 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import java.io.File;
 
 @SpringBootApplication
-@ComponentScan({"com.kee.stlcode", "SearchController"})
 public class StlCodeCafeApplication {
-
 	public static void main(String[] args){
-	new File(UploadController.uploadDirectory).mkdir();
 		SpringApplication.run(StlCodeCafeApplication.class, args);
 	}
 
