@@ -36,7 +36,7 @@ public class UploadController extends AbstractController {
 
         if (file.isEmpty()) {
             model.addAttribute("message", "Please choose a valid file");
-            return "redirect:../upload/upload-status";
+            return "upload/upload-status";
         }
 
         try {
@@ -60,7 +60,7 @@ public class UploadController extends AbstractController {
         }
 
             model.addAttribute("message", "Successfully Uploaded Photo.");
-            return "upload/upload-status.html";
+            return "upload/upload-status";
         }
 
 }
