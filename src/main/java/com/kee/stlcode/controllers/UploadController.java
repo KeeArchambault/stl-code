@@ -36,12 +36,12 @@ public class UploadController extends AbstractController {
 
         if (file.isEmpty()) {
             model.addAttribute("id", id);
+            model.addAttribute("message", "No file chosen.");
             return "redirect:/upload/{id}";
         }
 
         try {
             // Get the file and save it uploadDirectory
-
             //gets data from image and saves in a byte array
             byte[] bytes = file.getBytes();
 
@@ -58,7 +58,7 @@ public class UploadController extends AbstractController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+            model.addAttribute("title", "Success");
             model.addAttribute("message", "Successfully Uploaded Photo.");
             return "upload/upload-status.html";
         }
