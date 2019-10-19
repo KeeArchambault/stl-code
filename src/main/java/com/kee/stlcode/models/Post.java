@@ -27,7 +27,6 @@ public class Post implements Comparable<Post>{
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @OneToMany
