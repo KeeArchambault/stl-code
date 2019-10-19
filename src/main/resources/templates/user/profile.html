@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="text-center">
-        <img th:src="${'https://stl-code.herokuapp.com/app/src/main/resources/static/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
+        <img th:src="@{'https://stl-code.herokuapp.com/app/src/main/resources/static/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
         <br>
         <br>
         <form th:action="'/upload/' + ${user.id}">
