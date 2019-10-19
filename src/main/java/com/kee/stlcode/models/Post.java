@@ -4,6 +4,7 @@ package com.kee.stlcode.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -21,7 +22,7 @@ public class Post implements Comparable<Post>{
     private String title;
 
     @NotNull
-    @Lob
+    @Column(length = 16000000)
     @Size(min = 1, max =1500, message = "Post length must be between 1 and 1500 characters.")
     private String body;
 
@@ -50,6 +51,7 @@ public class Post implements Comparable<Post>{
         return id;
     }
 
+    @Transactional
     public String getTitle() {
         return title;
     }
@@ -57,6 +59,7 @@ public class Post implements Comparable<Post>{
         this.title = title;
     }
 
+    @Transactional
     public String getBody() {
         return body;
     }
