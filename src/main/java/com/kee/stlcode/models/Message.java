@@ -18,8 +18,9 @@ public class Message {
     @Size(min = 1, max = 50)
     private String subject;
 
-    @Lob
+
     @NotNull
+    @Column(length = 16000000)
     @Size(min = 1, max = 1500)
     private String body;
 
