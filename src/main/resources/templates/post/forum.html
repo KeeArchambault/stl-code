@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 th:inline="text"><a th:href="'/post/'+ ${post.id}" th:text="${post.title}">
-                        </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:href="'profile/' + ${post.user.id}" th:text="${post.user.name}"/></small></h3>
+                        </a><small style="text-size: 5pt; color: gray" th:inline="text">  by <a th:inline="text"><img th:src="${'/uploads/' + post.user.profilePic.name}" th:alt="${profilePic}" width="40px"/> <a th:href="'profile/' + ${post.user.id}" th:text="${post.user.name}"></a></a></small></h3>
                         <p class="card-text" th:text="${post.body}"></p>
                         <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Created <small th:text="${post.created}"/> | </small>
                         <small style="text-size: 5pt; color: gray" name ="commentCount" th:inline="text">Comments (<small th:text="${post.comments.size()}"/>) </small>
