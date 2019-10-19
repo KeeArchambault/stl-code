@@ -24,6 +24,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue
     private int id;
 
