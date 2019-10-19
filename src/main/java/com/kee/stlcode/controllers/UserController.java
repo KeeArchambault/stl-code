@@ -126,14 +126,16 @@ public class UserController extends AbstractController {
         Collections.sort(posts);
         Collections.reverse(posts);
 
-        File profilePic = user.getProfilePic();
+        File pic = user.getProfilePic();
 
-        if(profilePic == null){
+
+        if(pic == null){
             String fileName = "default.png";
             model.addAttribute("profilePic", fileName);
         }else {
-            String fileName = profilePic.getName();
-            model.addAttribute("profilePic", fileName);
+            String picName = pic.getName();
+            String profilePic = System.getProperty("user.dir") + "/src/main/resources/static/uploads/" + picName;
+            model.addAttribute("profilePic", profilePic);
         }
 
         model.addAttribute("posts", posts);
