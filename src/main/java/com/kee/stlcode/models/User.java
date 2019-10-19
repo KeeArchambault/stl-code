@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Entity
+@Table(name="\"User\"")
 public class User {
 
     @Id
