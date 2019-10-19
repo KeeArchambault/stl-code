@@ -76,7 +76,12 @@ public class UserController extends AbstractController {
 
             User user = getUserFromSession(request.getSession());
 
-            List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
+            List<Post> posts = new ArrayList<Post>();
+            for(Post post : user.getPosts()){
+                if (!post.isDeleted()){
+                    posts.add(post);
+                }
+            }
 
             Collections.sort(posts);
             Collections.reverse(posts);
@@ -101,7 +106,7 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
-    public String profile(HttpServletRequest request, Model model, @PathVariable int id) {
+    public String otherProfile(HttpServletRequest request, Model model, @PathVariable int id) {
 
         int currentUserId = getUserFromSession(request.getSession()).getId();
 
@@ -112,8 +117,12 @@ public class UserController extends AbstractController {
 
         User user = userDao.findById(id).get();
 
-        List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
-
+        List<Post> posts = new ArrayList<Post>();
+        for(Post post : user.getPosts()){
+            if (!post.isDeleted()){
+                posts.add(post);
+            }
+        }
         Collections.sort(posts);
         Collections.reverse(posts);
 
