@@ -32,8 +32,13 @@ public class UploadController extends AbstractController {
             return "upload/upload";
         }
     @RequestMapping(value="/upload/{id}")
-    public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) {
+    public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) throws IOException {
 
+
+        if(file.getBytes().length > 10000000){
+            model.addAttribute("message", "File size too large");
+        return "redirect:upload/upload-status";
+        }
         if (file.isEmpty()) {
             model.addAttribute("message", "Please choose a valid file");
             return "redirect:upload/upload-status";
