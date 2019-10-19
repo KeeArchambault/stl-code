@@ -133,7 +133,7 @@ public class UserController extends AbstractController {
             String fileName = "default.png";
             model.addAttribute("profilePic", fileName);
         }else {
-            String picName = pic.getPath();
+            String picName = pic.getAbsolutePath();
             model.addAttribute("profilePic", picName);
         }
 
