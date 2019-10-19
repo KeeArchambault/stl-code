@@ -92,7 +92,12 @@ public class PostController extends AbstractController{
         if(getUserFromSession(request.getSession()) == null) {
             return "redirect:/login";
         }
-        List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) postDao.findAll());
+        List<Post> posts = new ArrayList<Post>();
+        for(Post post :postDao.findAll()) {
+            if(!post.isDeleted()){
+                posts.add(post);
+            }
+        }
 
         Collections.sort(posts);
         Collections.reverse(posts);
@@ -106,7 +111,10 @@ public class PostController extends AbstractController{
 
     @RequestMapping(value="delete-post/{id}")
     public String remove(Model model, @PathVariable int id){
-            postDao.deleteById(id);
+
+            Post post = postDao.findById(id).get();
+            post.setDeleted(true);
+            postDao.save(post);
     return "redirect:/profile";
     }
 

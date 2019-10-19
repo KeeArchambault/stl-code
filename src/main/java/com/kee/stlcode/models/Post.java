@@ -29,6 +29,8 @@ public class Post implements Comparable<Post>{
     @ManyToOne
     private User user;
 
+    private boolean deleted = false;
+
     @OneToMany
     private List<Comment> comments;
 
@@ -74,6 +76,12 @@ public class Post implements Comparable<Post>{
         this.user = user;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
     public List<Comment> getComments() {
         return comments;
     }
