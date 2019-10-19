@@ -11,10 +11,9 @@ nav {
   background-size: cover;
 }
 
-
-
 .jumbotron h1{
     font-family: 'Orbitron', sans-serif;
+    font-size: 3.4em;
     color: white;
     text-shadow:
         -1px -1px 0 #000,
@@ -22,6 +21,19 @@ nav {
         -1px 1px 0 #000,
         1px 1px 0 #000;
     }
+
+.jumbotron h2{
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em;
+    color: white;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+
+
 }
 
 
