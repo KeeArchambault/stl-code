@@ -20,7 +20,7 @@
                             <p class="card-text" th:text="${message.body}"></p>
                             <small  style="text-size: 5pt; color: gray" name="date" th:inline="text">Sent <small th:text="${message.created}"/></small>
                             <br>
-                            <a onclick="window.confirm('Are you sure you want to delete this message?')" th:href="'/delete-message/' + ${message.id}">Delete</a>
+                            <a onclick="return window.confirm('Are you sure you want to delete this message?')" th:href="'/delete-message/' + ${message.id}">Delete</a>
                         </div>
                     </div>
                 </div>

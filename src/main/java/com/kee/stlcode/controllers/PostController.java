@@ -106,9 +106,7 @@ public class PostController extends AbstractController{
 
     @RequestMapping(value="delete-post/{id}")
     public String remove(Model model, @PathVariable int id){
-
-        postDao.deleteById(id);
-
+            postDao.deleteById(id);
     return "redirect:/profile";
     }
 
