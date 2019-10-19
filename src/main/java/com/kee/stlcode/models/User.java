@@ -24,7 +24,6 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue
     private int id;
 
