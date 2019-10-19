@@ -19,7 +19,7 @@ public class HomeController extends AbstractController{
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value="home")
+    @RequestMapping(value="")
     public String index(Model model){
 
         model.addAttribute("title", "Home");
@@ -27,13 +27,6 @@ public class HomeController extends AbstractController{
         return "home/index";
     }
 
-    @RequestMapping(value="cafe-directory", method= RequestMethod.GET)
-    public String cafeIndex(Model model) {
-
-        model.addAttribute("title", "Local Cafes");
-
-        return "home/cafe-directory";
-    }
 
     @RequestMapping(value="resources", method= RequestMethod.GET)
     public String resourcesIndex(Model model) {
