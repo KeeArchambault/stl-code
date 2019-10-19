@@ -35,8 +35,8 @@ public class UploadController extends AbstractController {
     public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) {
 
         if (file.isEmpty()) {
-            model.addAttribute("message", "Please choose a valid file");
-            return "redirect:upload/upload-status";
+            model.addAttribute("id", id);
+            return "redirect:/upload/{id}";
         }
 
         try {
