@@ -134,7 +134,7 @@ public class UserController extends AbstractController {
             model.addAttribute("profilePic", fileName);
         }else {
             String picName = pic.getName();
-            String profilePic = System.getProperty("user.dir") + "/src/main/resources/static/uploads/" + picName;
+            String profilePic = "https://stl-code.herokuapp.com/" + System.getProperty("user.dir") + "/src/main/resources/static/uploads/" + picName;
             model.addAttribute("profilePic", profilePic);
         }
 
