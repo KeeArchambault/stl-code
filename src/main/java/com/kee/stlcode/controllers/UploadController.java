@@ -24,13 +24,13 @@ public class UploadController extends AbstractController {
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/";
     //save the uploaded file to this folder
 
-        @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)
-        public String fileUpload(Model model, @PathVariable int id) {
+    @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)
+    public String fileUpload(Model model, @PathVariable int id) {
 
-            model.addAttribute("title", "Upload a Photo");
-            model.addAttribute("id", id);
-            return "upload/upload";
-        }
+        model.addAttribute("title", "Upload a Photo");
+        model.addAttribute("id", id);
+        return "upload/upload";
+    }
     @RequestMapping(value="/upload/{id}")
     public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) {
 
@@ -58,7 +58,7 @@ public class UploadController extends AbstractController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            model.addAttribute("title", "Success");
+            model.addAttribute("title", "Success!");
             model.addAttribute("message", "Successfully Uploaded Photo.");
             return "upload/upload-status.html";
         }
