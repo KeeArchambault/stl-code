@@ -66,7 +66,7 @@ public class UserController extends AbstractController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "profile", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    @RequestMapping(value = "profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model) {
 
         if(getUserFromSession(request.getSession()) == null){
@@ -91,6 +91,7 @@ public class UserController extends AbstractController {
                 String fileName = profilePic.getName();
                 model.addAttribute("profilePic", fileName);
             }
+
                 model.addAttribute("posts", posts);
                 model.addAttribute("user", user);
                 model.addAttribute("title", "Posts by Me");
