@@ -92,7 +92,6 @@ public class UserController extends AbstractController {
                 String fileName = "default.png";
                 model.addAttribute("profilePic", fileName);
             }else {
-                Path filePath = Paths.get(profilePic.getPath());
                 String fileName = profilePic.getName();
                 model.addAttribute("profilePic", fileName);
             }
@@ -126,15 +125,15 @@ public class UserController extends AbstractController {
         Collections.sort(posts);
         Collections.reverse(posts);
 
-        File pic = user.getProfilePic();
+        File profilePic = user.getProfilePic();
 
 
-        if(pic == null){
+        if(profilePic == null){
             String fileName = "default.png";
             model.addAttribute("profilePic", fileName);
         }else {
-            String picName = pic.getAbsolutePath();
-            model.addAttribute("profilePic", picName);
+            String fileName = profilePic.getName();
+            model.addAttribute("profilePic", fileName);
         }
 
         model.addAttribute("posts", posts);
