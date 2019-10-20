@@ -8,10 +8,10 @@
 
 <div class="container">
     <div class="text-center">
-        <img th:src="${'/uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
+        <img th:src="${'/../uploads/' + profilePic}" th:alt="${profilePic}" width="150px"/>
         <br>
         <br>
-        <form th:action="'/../uploads/' + ${user.id}">
+        <form th:action="'/upload/' + ${user.id}">
         <button type="submit"> Upload a Photo</button>
         </form>
         <br>
