@@ -54,6 +54,7 @@ public class UserController extends AbstractController {
                 return "redirect:/profile";
             }
         }
+
         model.addAttribute("errors", "Invalid login credentials.");
         return "user/login";
     }
@@ -69,15 +70,14 @@ public class UserController extends AbstractController {
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model) {
 
+        model.addAttribute("title", "Posts by Me");
+
         if(getUserFromSession(request.getSession()) == null){
             return "redirect:/login";
-
         }else {
-
             User user = getUserFromSession(request.getSession());
 
             List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
-
             Collections.sort(posts);
             Collections.reverse(posts);
 
@@ -87,16 +87,14 @@ public class UserController extends AbstractController {
                 String fileName = "default.png";
                 model.addAttribute("profilePic", fileName);
             }else {
-                Path filePath = Paths.get(profilePic.getPath());
                 String fileName = profilePic.getName();
                 model.addAttribute("profilePic", fileName);
             }
 
-                model.addAttribute("posts", posts);
-                model.addAttribute("user", user);
-                model.addAttribute("title", "Posts by Me");
-                return "user/profile";
+            model.addAttribute("posts", posts);
+            model.addAttribute("user", user);
 
+            return "user/profile";
         }
 
     }
@@ -107,14 +105,12 @@ public class UserController extends AbstractController {
         int currentUserId = getUserFromSession(request.getSession()).getId();
 
         if(id == currentUserId){
-
             return "redirect:/profile";
         }
 
         User user = userDao.findById(id).get();
 
         List<Post> posts = new ArrayList<Post>((Collection<? extends Post>) user.getPosts());
-
         Collections.sort(posts);
         Collections.reverse(posts);
 
@@ -148,28 +144,23 @@ public class UserController extends AbstractController {
     public String processSignUp(HttpServletRequest request, Model model, @ModelAttribute @Valid User user, Errors errors) {
 
         if (errors.hasErrors() || !user.getPassword().equals(user.getVerify())) {
-
             return "user/sign-up";
         }
         for(User existingUser : userDao.findAll()){
             if (user.getName().equals(existingUser.getName())) {
-
                 model.addAttribute("usernameError", "Account with that username already exists.");
                 return "user/sign-up";
-
             }
         }
+
         for(User existingUser : userDao.findAll()){
             if (user.getEmail().equals(existingUser.getEmail())) {
-
                 model.addAttribute("emailError", "Account with that email already exists.");
                 return "user/sign-up";
-
             }
         }
 
         if (!user.getPassword().equals(user.getVerify())) {
-
             model.addAttribute("passwordError", "Passwords do not match.");
             return "user/sign-up";
         }
