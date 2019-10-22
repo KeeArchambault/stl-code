@@ -13,7 +13,6 @@
         <button type="submit"> Upload a Photo</button>
         </form>
         <br>
-        <br>
         <p th:unless="${posts} and ${posts.size()}">No posts yet.</p>
     </div>
     <table th:each="post : ${posts}">
