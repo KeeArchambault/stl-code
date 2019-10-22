@@ -90,13 +90,16 @@ public class UserController extends AbstractController {
 
             if(profilePic == null){
                 String fileName = "default.png";
-                model.addAttribute("profilePic", "/src/main/resources/static/uploads/"+ fileName);
+                int id = 1;
+                model.addAttribute("id", id);
+                model.addAttribute("profilePic", fileName);
             }else {
+                int id = user.getId();
                 String fileName = profilePic.getName();
+                model.addAttribute("profilePic", fileName);
 
-
-                model.addAttribute("profilePic", "/myImage/imageDisplay/" + user.getId());
             }
+
                 model.addAttribute("posts", posts);
                 model.addAttribute("user", user);
                 model.addAttribute("title", "Posts by Me");
