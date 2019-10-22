@@ -95,6 +95,7 @@ public class UserController extends AbstractController {
                 model.addAttribute("profilePic", fileName);
             }else {
                 int id = user.getId();
+                model.addAttribute("id", id);
                 String fileName = profilePic.getName();
                 model.addAttribute("profilePic", fileName);
 
