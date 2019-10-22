@@ -66,7 +66,7 @@ public class PostController extends AbstractController{
     @RequestMapping(value = "new-post", method = RequestMethod.POST)
     public String processNewPost(HttpServletRequest request, Model model, @ModelAttribute @Valid Post post, Errors errors) {
 
-        model.addAttribute("title", "Create a New Post");
+        model.addAttribute("title", "New Post");
 
         if (errors.hasErrors()) {
             return "post/new-post";
