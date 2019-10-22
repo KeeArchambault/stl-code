@@ -33,7 +33,13 @@ nav {
         1px 1px 0 #000;
     }
 
+form {
+    max-width: 30em;
 
+}
+
+textarea{
+    height: 15em;
 }
 
 
