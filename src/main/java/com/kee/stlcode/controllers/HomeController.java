@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value="")
-public class HomeController extends AbstractController{
+public class HomeController extends AbstractController {
 
 
     @Autowired
@@ -19,19 +19,12 @@ public class HomeController extends AbstractController{
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value="")
-    public String index(Model model){
+    @RequestMapping(value = "")
+    public String index(Model model) {
 
         model.addAttribute("title", "Home");
 
         return "home/index";
     }
 
-
-    @RequestMapping(value="resources", method= RequestMethod.GET)
-    public String resourcesIndex(Model model) {
-
-        model.addAttribute("title", "Resources");
-        return "home/ed-resources";
-    }
 }
