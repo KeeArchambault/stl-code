@@ -7,38 +7,50 @@
 
 <div class="container">
     <br>
-    <form method="post" th:object="${user}">
-        <div class="form-group">
-            <label th:for="name">Username:</label>
-            <input class="form-control" th:field="*{name}"/>
-            <span th:errors="*{name}" class="error"></span>
+    <table>
+        <div class="row">
+            <div class="col">
+                <div class="card" id="login">
+                    <div class="card-body">
+                        <form method="post" th:object="${user}">
+                            <div class="form-group">
+                                <label th:for="name">Username:</label>
+                                <input class="form-control" th:field="*{name}"/>
+                                <span th:errors="*{name}" class="error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label th:for="email">Email:</label>
+                                <input class="form-control" type="email" th:field="*{email}"/>
+                                <span th:errors="*{email}" class="error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label th:for="password">Password:</label>
+                                <input class="form-control" type="password" th:field="*{password}"/>
+                                <span th:errors="*{password}" class="error"></span>
+                            </div>
+
+                            <label th:for="verify">Verify Password:</label>
+                            <div class="form-group">
+                                <input class="form-control" type="password" th:field="*{verify}"/>
+                                <span th:errors="*{verify}" class="error"></span>
+                                <br>
+                                <span style="color: red;" th:text="${emailError}"></span>
+                                <span style="color: red;" th:text="${usernameError}"></span>
+                                <span style="color: red;" th:text="${passwordError}"></span>
+                            </div>
+                            <input type="submit"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <br>
+    </table>
 
-        <div class="form-group">
-            <label th:for="email">Email:</label>
-            <input class="form-control" type="email" th:field="*{email}"/>
-            <span th:errors="*{email}" class="error"></span>
-        </div>
 
-        <div class="form-group">
-            <label th:for="password">Password:</label>
-            <input class="form-control" type="password" th:field="*{password}"/>
-            <span th:errors="*{password}" class="error"></span>
-        </div>
 
-        <label th:for="verify">Verify Password:</label>
-        <div class="form-group">
-            <input class="form-control" type="password" th:field="*{verify}"/>
-            <span th:errors="*{verify}" class="error"></span>
-            <br>
-            <span style="color: red;" th:text="${emailError}"></span>
-            <span style="color: red;" th:text="${usernameError}"></span>
-            <span style="color: red;" th:text="${passwordError}"></span>
-        </div>
-
-        <input type="submit"/>
-
-    </form>
 </div>
 
 <div th:replace="fragments :: js-footer"></div>
