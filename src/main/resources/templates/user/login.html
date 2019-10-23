@@ -7,26 +7,35 @@
 
 <br>
 <div class="container">
-    <form method="post" style="max-width: 30em;">
-        <div class="form-group">
-            <label th:for="username">Username:
-                <input class="form-control" type="text" name="username"/>
-            </label>
+    <table>
+        <div class="row">
+            <div class="col">
+                <div class="card" id="login">
+                    <div class="card-body">
+                        <form method="post" >
+                            <div class="form-group">
+                                <label th:for="username">Username:
+                                    <input class="form-control" type="text" name="username"/>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="password">Password:
+                                    <input class="form-control" type="password" name="password"/>
+                                </label>
+                                    <br>
+                                <span style="color: red;" th:text="${errors}"></span>
+                            </div>
+                            <input type="submit">
+                        </form>
+                        <br>
+                            <br>
+                            <a href="/sign-up">Don't have an account yet? Sign Up.</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label th:for="password">Password:
-                <input class="form-control" type="password" name="password"/>
-            </label>
-                <br>
-            <span style="color: red;" th:text="${errors}"></span>
-        </div>
-
-        <input type="submit">
-
-    </form>
-    <br>
-    <a href="/sign-up">Don't have an account yet? Sign Up.</a>
+            <br>
+    </table>
 </div>
 
 <div th:replace="fragments :: js-footer"></div>

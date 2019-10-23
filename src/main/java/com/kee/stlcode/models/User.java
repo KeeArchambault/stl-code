@@ -1,14 +1,7 @@
 package com.kee.stlcode.models;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-
-
-
-
 
 import org.springframework.web.multipart.MultipartFile;
 

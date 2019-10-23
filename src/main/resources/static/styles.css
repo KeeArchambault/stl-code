@@ -33,13 +33,22 @@ nav {
         1px 1px 0 #000;
     }
 
-.form-control {
+form {
     max-width: 30em;
 
 }
 
 textarea{
-    height: 15em;
+    height: 20em;
+}
+
+#login{
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        max-width: 18em;
+}
+
 }
 
 

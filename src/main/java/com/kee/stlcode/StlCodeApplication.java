@@ -15,5 +15,4 @@ public class StlCodeApplication {
 		new File(UploadController.uploadDirectory).mkdir();
 		SpringApplication.run(StlCodeApplication.class, args);
 	}
-
 }

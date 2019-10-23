@@ -13,6 +13,10 @@
         <br>
         <br>
         <input type="submit" value="Upload" />
+<!--        TODO get this message to display-->
+        <div th:if="${message}">
+            <p th:text="${message}"/>
+        </div>
     </form>
 
 
