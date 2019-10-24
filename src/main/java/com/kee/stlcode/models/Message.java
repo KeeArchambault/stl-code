@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -84,8 +85,9 @@ public class Message {
         this.sender = sender;
     }
 
-    public Date getCreated() {
-        return created;
+    public String getCreated() {
+        String formattedDate = new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
+        return formattedDate;
     }
 
     public boolean isSenderDeleted() {

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +90,9 @@ public class Post implements Comparable<Post>{
         this.comments.add(comment);
     }
 
-    public Date getCreated() {
-        return created;
+    public String getCreated() {
+        String formattedDate = new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
+        return formattedDate;
     }
 
     @Override
