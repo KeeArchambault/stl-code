@@ -7,7 +7,7 @@
 
 <div class="container">
     <br>
-    <form id="message-form" method="post" th:action="'/send-message/'+ ${recipientId} + '/' + ${senderId}" th:object="${message}">
+    <form style="max-width: 30em;" method="post" th:action="'/send-message/'+ ${recipientId} + '/' + ${senderId}" th:object="${message}">
         <label th:for="subject">Subject:</label>
             <br>
         <input type="text" name="subject" class="form-control" th:field="*{subject}"/>

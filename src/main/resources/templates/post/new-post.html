@@ -7,7 +7,7 @@
 
 <div class="container">
     <br>
-    <form id="post-form" method="post" class="form-group" th:object="${post}">
+    <form style="max-width: 30em;" method="post" class="form-group" th:object="${post}">
         <label th:for="title">Title:</label>
             <br>
         <input  type="text" name="title" class="form-control" th:field="*{title}"/>
