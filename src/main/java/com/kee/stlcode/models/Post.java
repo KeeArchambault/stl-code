@@ -35,11 +35,6 @@ public class Post implements Comparable<Post>{
 
     private LocalDateTime created;
 
-//    @PrePersist
-//    protected void onCreate() {
-//        created = new LocalDateTime();
-//    }
-
     public Post() {
     }
 
@@ -81,8 +76,7 @@ public class Post implements Comparable<Post>{
     }
 
     public String getCreated() {
-        String formattedDate = new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
-        return formattedDate;
+        return new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
     }
 
     @Override

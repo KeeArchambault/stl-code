@@ -34,7 +34,6 @@ public class Comment implements Comparable<Comment>{
     }
 
     public Comment() {
-
     }
 
     public Comment(String commentBody) {
@@ -67,8 +66,7 @@ public class Comment implements Comparable<Comment>{
     }
 
     public String getCreated() {
-        String formattedDate = new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
-        return formattedDate;
+        return new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
     }
 
     @Override
