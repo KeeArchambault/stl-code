@@ -9,6 +9,8 @@
         <br>
     <div class="text-center">
         <img th:src="@{'/myImage/imageDisplay/' + ${user.id}}" th:alt="${profilePic}" width="150px"/>
+        <br>
+        <br>
         <form th:action="'/send-message/' + ${user.id}">
             <button type="submit" th:text="'Message ' + ${user.name}"> </button>
         </form>
