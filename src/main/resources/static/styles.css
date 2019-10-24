@@ -33,7 +33,7 @@ nav {
         1px 1px 0 #000;
     }
 
-#message-form, #post-form {
+#message-form, #post-form, #comment-form {
     max-width: 30em;
 
 }
