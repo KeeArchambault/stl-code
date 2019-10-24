@@ -10,6 +10,7 @@
     <div class="text-center">
         <img th:src="@{'/myImage/imageDisplay/' + ${id}}" th:alt="${profilePic}" width="150px"/>
         <br>
+        <br>
         <form th:action="'/upload/' + ${user.id}">
         <button type="submit"> Upload a Photo</button>
         </form>
