@@ -33,10 +33,13 @@ nav {
         1px 1px 0 #000;
     }
 
-#message-form, #post-form {
-    max-width: 30em;
+#message-form, {
+     max-width: 30em;
 
 }
+ #post-form{
+ max-width: 30em;
+ }
 
 textarea{
     height: 20em;
