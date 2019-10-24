@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,12 +33,12 @@ public class Post implements Comparable<Post>{
     @OneToMany
     private List<Comment> comments;
 
-    private Date created;
+    private LocalDateTime created;
 
-    @PrePersist
-    protected void onCreate() {
-        created = new Date();
-    }
+//    @PrePersist
+//    protected void onCreate() {
+//        created = new LocalDateTime();
+//    }
 
     public Post() {
     }
