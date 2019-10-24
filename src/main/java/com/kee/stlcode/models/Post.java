@@ -33,7 +33,12 @@ public class Post implements Comparable<Post>{
     @OneToMany
     private List<Comment> comments;
 
-    private LocalDateTime created;
+    private Date created;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
 
     public Post() {
     }
