@@ -56,7 +56,6 @@ public class Message {
     public String getSubject() {
         return subject;
     }
-
     public void setSubject(String subject) {
         this.subject = subject;
     }
@@ -64,7 +63,6 @@ public class Message {
     public String getBody() {
         return body;
     }
-
     public void setBody(String body) {
         this.body = body;
     }
@@ -72,7 +70,6 @@ public class Message {
     public User getRecipient() {
         return recipient;
     }
-
     public void setRecipient(User recipient) {
         this.recipient = recipient;
     }
@@ -80,14 +77,12 @@ public class Message {
     public User getSender() {
         return sender;
     }
-
     public void setSender(User sender) {
         this.sender = sender;
     }
 
     public String getCreated() {
-        String formattedDate = new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
-        return formattedDate;
+        return new SimpleDateFormat("MM/dd/yyyy, h:mm a").format(created);
     }
 
     public boolean isSenderDeleted() {
