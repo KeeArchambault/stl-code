@@ -38,6 +38,21 @@
     </table>
 </div>
 
+<script>
+
+ onload = function() {
+    if(document.referrer !== 'http://localhost:8080/home'){
+         if(document.referrer !== 'http://localhost:8080/sign-up'){
+            if(document.referrer !== 'http://localhost:8080/login'){
+              window.alert("You are now logged out.");
+              return false;
+              }
+         }
+    }
+ };
+
+</script>
+
 <div th:replace="fragments :: js-footer"></div>
 </body>
 </html>
