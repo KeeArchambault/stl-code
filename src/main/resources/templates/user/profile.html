@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
-<!--<h1 th:text="'Posts by ' + ${user.name}"></h1>-->
+<body class="container" >
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<div class="container">
+<div class="container" >
     <div class="text-center">
         <img th:src="@{'/myImage/imageDisplay/' + ${id}}" th:alt="${profilePic}" width="150px"/>
         <br>
@@ -38,7 +37,18 @@
 </div>
 
 
-
+  <script>
+    onload = function() {
+    if(document.referrer == 'http://localhost:8080/login'){
+      window.alert("You are now logged in.");
+      return false;
+      }
+    if(document.referrer == 'http://localhost:8080/sign-up'){
+      window.alert("You have successfully signed up!");
+      return false;
+      }
+    };
+  </script>
 <div th:replace="fragments :: js-footer"></div>
 
 
