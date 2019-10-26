@@ -60,8 +60,8 @@ public class SearchController extends AbstractController{
                     model.addAttribute("id", defaultId);
                     model.addAttribute("profilePic", fileName);
                 }else {
-                    Path filePath = Paths.get(profilePic.getPath());
                     String fileName = profilePic.getName();
+                    model.addAttribute("id", user.getId());
                     model.addAttribute("profilePic", fileName);
                 }
             }

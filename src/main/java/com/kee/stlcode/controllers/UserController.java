@@ -141,6 +141,7 @@ public class UserController extends AbstractController {
             model.addAttribute("profilePic", fileName);
         }else {
             String fileName = profilePic.getName();
+            model.addAttribute("id", user.getId());
             model.addAttribute("profilePic", fileName);
         }
 
@@ -161,7 +162,8 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "sign-up", method = RequestMethod.POST)
-    public String processSignUp(HttpServletRequest request, Model model, @ModelAttribute @Valid User user, Errors errors) {
+    public String processSignUp(HttpServletRequest request, Model model,
+                                @ModelAttribute @Valid User user, Errors errors) {
 
         if (errors.hasErrors() || !user.getPassword().equals(user.getVerify())) {
 
@@ -170,7 +172,8 @@ public class UserController extends AbstractController {
         for(User existingUser : userDao.findAll()){
             if (user.getName().equals(existingUser.getName())) {
 
-                model.addAttribute("usernameError", "Account with that username already exists.");
+                model.addAttribute("usernameError",
+                        "Account with that username already exists.");
                 return "user/sign-up";
 
             }
