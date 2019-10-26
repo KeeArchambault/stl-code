@@ -8,7 +8,7 @@
 <div class="container" th:object="${user}">
         <br>
     <div class="text-center">
-        <img th:src="@{'/myImage/imageDisplay/' + ${user.id}}" th:alt="${profilePic}" width="150px"/>
+        <img th:src="@{'/myImage/imageDisplay/' + ${id}}" th:alt="${profilePic}" width="150px"/>
         <br>
         <br>
         <form th:action="'/send-message/' + ${user.id}">

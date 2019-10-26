@@ -20,7 +20,7 @@
 
     <table th:each="result: ${userResults}">
 
-        <h3 th:inline="text"><img th:src="@{'/myImage/imageDisplay/' + ${result.id}}" th:alt="${profilePic}" width="150px"/>   <a th:href="'/profile/'+ ${result.id}" th:text="${result.name}"></a></h3>
+        <h3 th:inline="text"><img th:src="@{'/myImage/imageDisplay/' + ${id}}" th:alt="${profilePic}" width="150px"/>   <a th:href="'/profile/'+ ${result.id}" th:text="${result.name}"></a></h3>
     </table>
     <br>
 </div>
