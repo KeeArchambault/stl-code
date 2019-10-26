@@ -56,6 +56,8 @@ public class SearchController extends AbstractController{
 
                 if(profilePic == null){
                     String fileName = "default.png";
+                    int defaultId = 1;
+                    model.addAttribute("id", defaultId);
                     model.addAttribute("profilePic", fileName);
                 }else {
                     Path filePath = Paths.get(profilePic.getPath());
