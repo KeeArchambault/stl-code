@@ -24,30 +24,31 @@ public class UploadController extends AbstractController {
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/";
     //save the uploaded file to this folder
 
-        @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)
-        public String fileUpload(Model model, @PathVariable int id) {
+    @RequestMapping(value="/upload/{id}", method=RequestMethod.GET)
+    public String fileUpload(Model model, @PathVariable int id) {
 
-            model.addAttribute("title", "Upload a Photo");
-            model.addAttribute("id", id);
-            return "upload/upload";
-        }
+        model.addAttribute("title", "Upload a Photo");
+        model.addAttribute("id", id);
+        return "upload/upload";
+    }
+
     @RequestMapping(value="/upload/{id}")
     public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) throws IOException {
 
+        model.addAttribute("title", "Upload a Photo");
+
         if (file.isEmpty()) {
+
             model.addAttribute("message", "Please choose a valid file");
             return "upload/upload-status";
         }
 
         try {
             // Get the file and save it uploadDirectory
-
             //gets data from image and saves in a byte array
             byte[] bytes = file.getBytes();
-
             //creates a path where we can store the file
             Path path = Paths.get(uploadDirectory +  file.getOriginalFilename());
-
             //need the path to already exist
             Files.write(path, bytes);
 
@@ -59,8 +60,8 @@ public class UploadController extends AbstractController {
             e.printStackTrace();
         }
 
-            model.addAttribute("message", "Successfully Uploaded Photo.");
-            return "upload/upload-status";
+        model.addAttribute("message", "Successfully Uploaded Photo.");
+        return "upload/upload-status";
         }
 
 }
