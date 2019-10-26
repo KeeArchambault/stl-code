@@ -43,7 +43,7 @@ public class MessageController extends AbstractController {
     }
 
     @RequestMapping("inbox")
-    public String inbox(HttpServletRequest request, Model model){
+    public String inboxMessages(HttpServletRequest request, Model model){
 
         model.addAttribute("title", "Inbox");
 
@@ -76,7 +76,7 @@ public class MessageController extends AbstractController {
     }
 
     @RequestMapping(value="sent")
-    public String sent(HttpServletRequest request, Model model) {
+    public String sentMessages(HttpServletRequest request, Model model) {
 
         model.addAttribute("title", "Sent Messages");
 
@@ -125,7 +125,7 @@ public class MessageController extends AbstractController {
     }
 
     @RequestMapping(value="delete-message/{id}")
-    public String remove(HttpServletRequest request, Model model, @PathVariable int id){
+    public String removeMessage(HttpServletRequest request, Model model, @PathVariable int id){
 
         Message message = messageDao.findById(id).get();
         User currentUser = getUserFromSession(request.getSession());

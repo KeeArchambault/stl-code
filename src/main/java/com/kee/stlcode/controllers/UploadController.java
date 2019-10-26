@@ -33,7 +33,7 @@ public class UploadController extends AbstractController {
     }
 
     @RequestMapping(value="/upload/{id}")
-    public String fileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) throws IOException {
+    public String processFileUpload(Model model, @RequestParam MultipartFile file, @PathVariable int id) throws IOException {
 
         model.addAttribute("title", "Upload a Photo");
 

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import java.util.List;
 public class SearchController extends AbstractController{
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public String searchResults(HttpServletRequest request, Model model) {
+    public String search(HttpServletRequest request, Model model) {
 
         if(getUserFromSession(request.getSession()) == null) {
             return "redirect:/login";

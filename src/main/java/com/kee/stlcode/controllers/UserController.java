@@ -5,7 +5,6 @@ import com.kee.stlcode.models.User;
 import com.kee.stlcode.models.data.PostDao;
 import com.kee.stlcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +30,7 @@ public class UserController extends AbstractController {
     private PostDao postDao;
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login(Model model) {
+    public String displayLogin(Model model) {
 
         model.addAttribute("title", "Log In");
 
@@ -111,7 +107,7 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "profile/{id}", method = RequestMethod.GET)
-    public String otherProfile(HttpServletRequest request, Model model, @PathVariable int id) {
+    public String otherUserProfile(HttpServletRequest request, Model model, @PathVariable int id) {
 
         int currentUserId = getUserFromSession(request.getSession()).getId();
 
@@ -153,7 +149,7 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = "sign-up", method = RequestMethod.GET)
-    public String signUp(Model model, User user) {
+    public String DisplaySignUp(Model model, User user) {
 
         model.addAttribute("title", "Sign Up");
 
