@@ -20,7 +20,7 @@
         <span th:errors="*{commentBody}" class="error"></span>
         <input name="id" type="hidden" th:value="${post.id}"/>
             <br>
-        <input type="submit" value="submit">
+        <input type="submit" value="Submit">
     </form>
     <br>
     <table th:each="postComment : ${comments}">
