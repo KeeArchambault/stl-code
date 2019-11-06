@@ -24,14 +24,6 @@ import java.util.*;
 @RequestMapping(value="")
 public class PostController extends AbstractController{
 
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private PostDao postDao;
-
-    @Autowired
-    private CommentDao commentDao;
 
     @RequestMapping(value="post/{id}", method = RequestMethod.GET)
     public String viewPost(Model model, @PathVariable int id, Comment comment){

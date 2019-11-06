@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.kee.stlcode.models.User;
+import com.kee.stlcode.models.data.CommentDao;
 import com.kee.stlcode.models.data.MessageDao;
 import com.kee.stlcode.models.data.PostDao;
 import com.kee.stlcode.models.data.UserDao;
@@ -19,6 +20,9 @@ public abstract class AbstractController {
 
         @Autowired
         protected MessageDao messageDao;
+
+        @Autowired
+        protected CommentDao commentDao;
 
         public static final String userSessionKey = "id";
 

@@ -27,12 +27,6 @@ import java.util.List;
 @RequestMapping(value="")
 public class UserController extends AbstractController {
 
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private PostDao postDao;
-
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
 
